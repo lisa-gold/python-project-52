@@ -2,7 +2,8 @@
 # Exit on error
 set -o errexit
 
-poetry install -r requirements.txt
+# Install 
+pip install -r requirements.txt
 
 # Convert static asset files
 python manage.py collectstatic --no-input
