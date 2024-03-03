@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% load django_bootstrap5 %}
+{% load i18n %}
 
 {% block main %}
 <div class="container-lg mt-3">
     <div class="row">
     <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 p-5 bg-light">
-      <h1 class="display-3">Привет от Хекслета!</h1>
-        <p class="lead">Практические курсы по программированию</p>
+      <h1 class="display-3">{% translate "Hello from Hexlet" %}</h1>
+        <p class="lead">{% translate "Online School of Programming" %}</p>
 
         <hr>
 
-        <a href="https://ru.hexlet.io/" class="btn btn-primary btn-lg" target="_blank">Узнать больше</a>
+        <a href="https://ru.hexlet.io/" class="btn btn-primary btn-lg" target="_blank">{% translate "Learn more" %}</a>
 
     </div>
     </div>
