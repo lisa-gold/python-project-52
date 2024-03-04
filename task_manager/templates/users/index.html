@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block main %}
+<h2 class="m-3">{% translate "Users" %}</h2>
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in. Your id = {{ user.id }}</p>
+{% else %}
+    <p>Welcome, new user. Please log in.</p>
+{% endif %}
+
+<table class="table table-striped">
+<tr>
+    <th>ID</th>
+    <th>{% translate "User name" %}</th>
+    <th>{% translate "Full name" %}</th>
+    <th>{% translate "Registration date" %}</th>
+    <th></th>
+    {% for user_data in users_list %}
+    <tr>
+        <td>{{ user_data.id }}</td>
+        <td>{{ user_data.username }}</td>
+        <td>{{ user_data.first_name }} {{ user_data.last_name }}</td>
+        <td>{{ user_data.date_joined|date:"d.m.Y H:i" }}</td>
+        <td>
+            <a href="{% if user.id == user_data.id %}
+            {% url 'users:update' user.id %}
+            {% else %}
+            {% url 'users:index' %}
+            {% endif %}">
+            {% translate "update" %}
+            </a>
+        <br>
+            <a href="{% if user.id == user_data.id %}
+            {% url 'users:delete' user.id %}
+            {% endif %}">{% translate "delete" %}</a>
+        </td>
+    </tr>
+    {% endfor %}
+</tr>
+</table>
+{% endblock %}

@@ -8,30 +8,69 @@
     
     <header class="container flex-shrink-0">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark px-3">
-            <a class="navbar-brand" href="#">{% translate "Task manager" %}</a>
-            <div id="navbarNav">
-                <ul class="navbar-nav">
+            
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">{% translate "Users" %}</a>
+                        <a class="nav-link" href="{% url 'index' %}">{% translate "Task manager" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">{% translate "Sign in" %}</a>
+                        <a href="{% url 'users:index' %}" class="nav-link">{% translate "Users" %}</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">{% translate "Statuses" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">{% translate "Sign up" %}</a>
+                        <a href="{% url 'index' %}" class="nav-link">{% translate "Tags" %}</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">{% translate "Tasks" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="nav-link btn">{% translate "Log out" %}</input>
+                        </form>
+                    </li>
+                    
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link">{% translate "Log in" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'users:create' %}" class="nav-link">{% translate "Sign up" %}</a>
+                    </li>
+                    {% endif %}
                 </ul>
-            </div>
         </nav>
     </header>
    
+    {% block messages %}
+    <div class="container flex-shrink-0">
+        <div class="messages" id="messages-list">
+        {% if messages %}
+            {% for message in messages %}
+            <p>
+                {% if message.tags %}
+                     <div class="alert alert-{{ message.tags }} msg fade show" role="alert">{{ message }}</div>
+                {% else %}
+                    <div class="alert alert-info msg fade show" role="alert">{{ message }}</div>
+                {% endif %}
+            </p>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+        
+    {% endblock %}
 
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 container">
     {% block main %}
     {% endblock %}
     </main>
     
-    <footer class="flex-shrink-0 border-top py-3 mt-5">
+    <footer class="container flex-shrink-0 border-top py-3 mt-5">
         <div class="container-lg text-center">
             <a href="https://ru.hexlet.io/" target="_blank">Hexlet</a>
         </div>
