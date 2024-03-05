@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from task_manager.users.models import Users
 from task_manager.users.forms import UserForm, UserUpdateForm
 from django.urls import reverse_lazy

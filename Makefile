@@ -2,7 +2,7 @@ MANAGE := poetry run python manage.py
 
 .PHONY: test
 test:
-	@poetry run pytest
+	python manage.py test
 
 start:
 	python -m gunicorn task_manager.asgi:application -k uvicorn.workers.UvicornWorker
