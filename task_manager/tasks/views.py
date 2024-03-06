@@ -11,7 +11,6 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 
@@ -67,10 +66,8 @@ class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('tasks:index')
     success_message = 'Task successfully deleted!'
     login_url = reverse_lazy('login')
-    permission_denied_message = "Only task's author can delete it!"
     redirect_field_name = reverse_lazy('tasks:index')
-    
-    
+
     def render_to_response(self, context, **response_kwargs):
         task = super(TaskDelete, self).get_object()
         if not task.author == self.request.user:

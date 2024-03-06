@@ -26,17 +26,11 @@
         <td>{{ user_data.first_name }} {{ user_data.last_name }}</td>
         <td>{{ user_data.date_joined|date:"d.m.Y H:i" }}</td>
         <td>
-            <a href="{% if user.id == user_data.id %}
-            {% url 'users:update' user.id %}
-            {% else %}
-            {% url 'users:index' %}
-            {% endif %}">
+            <a href="{% url 'users:update' user.id %}">
             {% translate "update" %}
             </a>
         <br>
-            <a href="{% if user.id == user_data.id %}
-            {% url 'users:delete' user.id %}
-            {% endif %}">{% translate "delete" %}</a>
+            <a href="{% url 'users:delete' user.id %}">{% translate "delete" %}</a>
         </td>
     </tr>
     {% endfor %}
