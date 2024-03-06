@@ -24,7 +24,7 @@
                         <a href="{% url 'index' %}" class="nav-link">{% translate "Tags" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'index' %}" class="nav-link">{% translate "Tasks" %}</a>
+                        <a href="{% url 'tasks:index' %}" class="nav-link">{% translate "Tasks" %}</a>
                     </li>
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="post">

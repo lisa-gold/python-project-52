@@ -8,9 +8,7 @@
 {% block main %}
 <h2 class="m-3">{% translate "Statuses" %}</h2>
 
-<a class="btn btn-primary" href="{% url 'statuses:create' %}">{% translate "Create status" %}</a>
-
-<br>
+<a class="btn btn-primary m-3" href="{% url 'statuses:create' %}">{% translate "Create status" %}</a>
 
 <table class="table table-striped">
 <tr>
@@ -35,4 +33,3 @@
 </tr>
 </table>
 {% endblock %}
->
