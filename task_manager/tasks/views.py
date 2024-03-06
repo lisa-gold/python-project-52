@@ -11,6 +11,8 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
@@ -18,7 +20,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.add_message(request, messages.WARNING,
+            messages.add_message(request, messages.ERROR,
                                  self.permission_denied_message)
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
@@ -65,3 +67,14 @@ class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('tasks:index')
     success_message = 'Task successfully deleted!'
     login_url = reverse_lazy('login')
+    permission_denied_message = "Only task's author can delete it!"
+    redirect_field_name = reverse_lazy('tasks:index')
+    
+    
+    def render_to_response(self, context, **response_kwargs):
+        task = super(TaskDelete, self).get_object()
+        if not task.author == self.request.user:
+            permission_denied_message = "Only task's author can delete it!"
+            messages.warning(self.request, permission_denied_message)
+            return HttpResponseRedirect(self.redirect_field_name)
+        return super().render_to_response(context, **response_kwargs)
