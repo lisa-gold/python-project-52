@@ -30,7 +30,7 @@ class UserUpdate(SuccessMessageMixin, UpdateView):
 
     def render_to_response(self, context, **response_kwargs):
         user_to_update = super(UserUpdate, self).get_object()
-        if not user_to_update == self.request.user:
+        if not user_to_update.id == self.request.user.id:
             permission_denied_message = "You cannot edit other users!"
             messages.warning(self.request, permission_denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
@@ -46,7 +46,7 @@ class UserDelete(SuccessMessageMixin, DeleteView):
 
     def render_to_response(self, context, **response_kwargs):
         user_to_delete = super(UserDelete, self).get_object()
-        if not user_to_delete == self.request.user:
+        if not user_to_delete.id == self.request.user.id:
             permission_denied_message = "You cannot delete other users!"
             messages.warning(self.request, permission_denied_message)
             return HttpResponseRedirect(self.redirect_field_name)

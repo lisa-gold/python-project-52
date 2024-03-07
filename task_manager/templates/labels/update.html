@@ -4,11 +4,12 @@
 {% load i18n %}
 
 {% block main %}
-<h2 class="mt-3">{% translate "Delete user" %} "{{ object }}"?</h2>
+<h2 class="mt-3">{% translate "Edit label" %}</h2>
 
 <form method="post">
     {% csrf_token %}
-    <input class="btn btn-primary" type="submit" value="{% translate 'Delete' %}">
+    {% bootstrap_form form %}
+    <input class="btn btn-primary" type="submit" value="{% translate 'Edit' %}">
 </form>
 
 {% endblock %}

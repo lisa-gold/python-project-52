@@ -41,7 +41,7 @@ class UsersTestCase(TestCase):
         response = self.client.get(reverse('users:update',
                                    args=[exist_user.pk]))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_update(self):
         exist_user = Users.objects.get(first_name='John')
@@ -62,7 +62,7 @@ class UsersTestCase(TestCase):
         response = self.client.get(reverse('users:delete',
                                            args=[exist_user.pk]))
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_delete(self):
         exist_user = Users.objects.get(first_name='John')

@@ -7,7 +7,7 @@ class TaskForm(ModelForm):
 
     class Meta:
         model = Tasks
-        fields = ['name', 'description', 'status', 'executor']  # , 'labels']
+        fields = ['name', 'description', 'status', 'executor', 'labels']
 
     def clean_author(self):
         if not self.cleaned_data['author']:
@@ -19,4 +19,4 @@ class TaskUpdateForm(ModelForm):
 
     class Meta:
         model = Tasks
-        fields = ['name', 'description', 'status', 'executor']  # , 'labels']
+        fields = ['name', 'description', 'status', 'executor', 'labels']
