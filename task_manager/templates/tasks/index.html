@@ -8,7 +8,21 @@
 
 <a class="btn btn-primary m-3" href="{% url 'tasks:create' %}">{% translate "Create task" %}</a>
 
-<br>
+<div class="card mb-3">
+    <div class="card-body bg-light">
+        <form method="get" class="form-inline center">
+            {% for field in filter.form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+            </div>
+            {% endfor %}
+
+            <input class="btn btn-primary m-3" type="submit" value="{% translate  'Show' %}"/>
+
+        </form>
+    </div>
+</div>
 
 <table class="table table-striped">
 <tr>
@@ -19,7 +33,7 @@
     <th>{% translate "Executor" %}</th>
     <th>{% translate "Creation date" %}</th>
     <th></th>
-    {% for task_data in tasks_list %}
+    {% for task_data in filter.qs %}
     <tr>
         <td>{{ task_data.id }}</td>
         <td><a href="{% url 'tasks:detail' task_data.id %}">{{ task_data.name }}</a></td>

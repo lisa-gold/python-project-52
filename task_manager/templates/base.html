@@ -11,10 +11,10 @@
             
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">{% translate "Task manager" %}</a>
+                        <a class="nav-link" href="{% url 'index' %}">{% translate 'Task manager' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'users:index' %}" class="nav-link">{% translate "Users" %}</a>
+                        <a href="{% url 'users:index' %}" class="nav-link">{% translate 'Users' %}</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">

@@ -7,11 +7,13 @@ from django.views.generic import (
                                  )
 from task_manager.tasks.models import Tasks
 from task_manager.tasks.forms import TaskForm, TaskUpdateForm
+from task_manager.tasks.filter import TaskFilter
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django_filters.views import FilterView
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
@@ -25,10 +27,11 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class IndexView(CustomLoginRequiredMixin, ListView):
+class IndexView(CustomLoginRequiredMixin, FilterView):
     model = Tasks
     template_name = 'tasks/index.html'
     login_url = reverse_lazy('login')
+    filterset_class = TaskFilter
 
 
 class TaskDetail(DetailView):
