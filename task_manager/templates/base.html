@@ -1,9 +1,17 @@
-{% extends 'django_bootstrap5/bootstrap5.html' %}
-{% block bootstrap5_title %}{% block title %}Task manager{% endblock %}{% endblock %}
 {% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 {% load i18n %}
+{% get_current_language as lang %}
 
-{% block bootstrap5_content %}
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% translate 'Task manager' %}</title>
+</head>
+
 <body class="min-vh-100 d-flex flex-column">
     
     <header class="container flex-shrink-0">
@@ -76,4 +84,4 @@
         </div>
     </footer>
 </body>
- {% endblock %}
+</html>
