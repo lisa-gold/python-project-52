@@ -11,13 +11,8 @@
 <div class="card mb-3">
     <div class="card-body bg-light">
         <form method="get" class="form-inline center">
-            {% for field in filter.form %}
-            <div class="mb-3">
-                {{ field.label_tag }}
-                {{ field }}
-            </div>
-            {% endfor %}
-
+            {% bootstrap_form filter.form %}
+            
             <input class="btn btn-primary m-3" type="submit" value="{% translate  'Show' %}"/>
 
         </form>
