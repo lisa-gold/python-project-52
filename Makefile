@@ -20,4 +20,4 @@ lint:
 	@poetry run flake8 task_manager
 
 test-coverage:
-	poetry run pytest --cov=task_manager --cov-report xml
+	poetry run coverage xml
