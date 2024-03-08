@@ -95,9 +95,9 @@ DATABASES = {
     }
 }
 
-if DATABASE_URL != 'django.db.backends.sqlite3':
-    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL,
-                                                  conn_max_age=600)
+if DATABASE_URL:
+    DATABASES['default'].update(dj_database_url.config(default=DATABASE_URL,
+                                                       conn_max_age=600))
 
 
 # Password validation
