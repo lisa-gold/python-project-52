@@ -5,9 +5,11 @@ from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
+    login_url = reverse_lazy('login')
     permission_denied_message = 'To open this page log in!'
 
     def dispatch(self, request, *args, **kwargs):
@@ -30,7 +32,6 @@ class StatusCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses:index')
     success_message = 'Status successfully added!'
-    login_url = reverse_lazy('login')
 
 
 class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -39,7 +40,6 @@ class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'statuses/update.html'
     success_url = reverse_lazy('statuses:index')
     success_message = 'Status successfully updated!'
-    login_url = reverse_lazy('login')
 
 
 class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -47,4 +47,12 @@ class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses:index')
     success_message = 'Status successfully deleted!'
-    login_url = reverse_lazy('login')
+    redirect_field_name = reverse_lazy('statuses:index')
+
+    def render_to_response(self, context, **response_kwargs):
+        status = super(StatusDelete, self).get_object()
+        if status.tasks_set.all():
+            denied_message = "Status is in use, you cannot delete it!"
+            messages.warning(self.request, denied_message)
+            return HttpResponseRedirect(self.redirect_field_name)
+        return super().render_to_response(context, **response_kwargs)

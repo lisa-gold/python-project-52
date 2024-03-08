@@ -51,7 +51,8 @@ class UserDelete(SuccessMessageMixin, DeleteView):
             messages.warning(self.request, permission_denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         if user_to_delete.tasks.all() or user_to_delete.tasks_to_do.all():
-            denied_message = "You cannot delete this user because he/she has a task to execute!"
+            denied_message = "You cannot delete this user because\
+                              he/she has a task to execute!"
             messages.warning(self.request, denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         return super().render_to_response(context, **response_kwargs)
