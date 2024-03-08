@@ -15,9 +15,9 @@ class TaskFilter(django_filters.FilterSet):
                                              queryset=Labels.objects.all(),
                                              field_name='labels')
     is_author = django_filters.BooleanFilter(field_name='author',
-                                          widget=forms.CheckboxInput,
-                                          method='filter_own_tasks',
-                                          label='Only my tasks')
+                                             widget=forms.CheckboxInput,
+                                             method='filter_own_tasks',
+                                             label='Only my tasks')
 
     class Meta:
         model = Tasks
