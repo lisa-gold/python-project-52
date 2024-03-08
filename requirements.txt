@@ -13,3 +13,4 @@ rollbar==0.16.3
 django-extensions==3.2.3
 pytest-django==4.8.0
 coverage==7.4.3
+python-gettext==5.0
