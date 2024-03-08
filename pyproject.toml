@@ -20,7 +20,7 @@ flake8 = "^7.0.0"
 django-extensions = "^3.2.3"
 pytest-django = "^4.8.0"
 django-filter = "^23.5"
-rollbar = "^1.0.0"
+rollbar = "^0.16.3"
 
 [tool.poetry.group.dev.dependencies]
 
