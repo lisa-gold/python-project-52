@@ -19,7 +19,7 @@
     <th>{% translate "Full name" %}</th>
     <th>{% translate "Registration date" %}</th>
     <th></th>
-    {% for user_data in users_list %}
+    {% for user_data in customuser_list %}
     <tr>
         <td>{{ user_data.id }}</td>
         <td>{{ user_data.username }}</td>

@@ -19,7 +19,7 @@ class UsersTestCase(TestCase):
 
         users = CustomUser.objects.all()
         self.assertQuerysetEqual(
-            response.context['users_list'],
+            response.context['customuser_list'],
             users,
             ordered=False,
         )
@@ -53,6 +53,17 @@ class UsersTestCase(TestCase):
             new_user,
         )
 
+        # not logged in
+        self.assertRedirects(response, reverse('users:index'))
+        not_updated_user = CustomUser.objects.get(first_name='John')
+        self.assertEqual(not_updated_user.last_name, 'Snow')
+
+        # logged in
+        self.client.force_login(user=exist_user)
+        response = self.client.post(
+            reverse('users:update', args=[exist_user.pk]),
+            new_user,
+        )
         self.assertRedirects(response, reverse('users:index'))
         updated_user = CustomUser.objects.get(first_name='John')
         self.assertEqual(updated_user.last_name, 'Stark')

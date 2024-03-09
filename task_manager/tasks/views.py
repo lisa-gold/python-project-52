@@ -4,7 +4,7 @@ from django.views.generic import (
                                   UpdateView,
                                   DetailView
                                  )
-from task_manager.tasks.models import Tasks
+from task_manager.tasks.models import Task
 from task_manager.tasks.forms import TaskForm, TaskUpdateForm
 from task_manager.tasks.filter import TaskFilter
 from django.urls import reverse_lazy
@@ -28,20 +28,20 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 
 class IndexView(CustomLoginRequiredMixin, FilterView):
-    model = Tasks
+    model = Task
     template_name = 'tasks/index.html'
     login_url = reverse_lazy('login')
     filterset_class = TaskFilter
 
 
 class TaskDetail(DetailView):
-    model = Tasks
+    model = Task
     template_name = 'tasks/detail.html'
     login_url = reverse_lazy('login')
 
 
 class TaskCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Tasks
+    model = Task
     form_class = TaskForm
     template_name = 'tasks/create.html'
     success_url = reverse_lazy('tasks:index')
@@ -55,7 +55,7 @@ class TaskCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Tasks
+    model = Task
     form_class = TaskUpdateForm
     template_name = 'tasks/update.html'
     success_url = reverse_lazy('tasks:index')
@@ -64,7 +64,7 @@ class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
-    model = Tasks
+    model = Task
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully deleted!')

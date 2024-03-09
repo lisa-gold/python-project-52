@@ -1,12 +1,12 @@
 from django.forms import ModelForm
-from task_manager.tasks.models import Tasks
+from task_manager.tasks.models import Task
 from task_manager.users.models import CustomUser
 
 
 class TaskForm(ModelForm):
 
     class Meta:
-        model = Tasks
+        model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
 
     def clean_author(self):
@@ -18,5 +18,5 @@ class TaskForm(ModelForm):
 class TaskUpdateForm(ModelForm):
 
     class Meta:
-        model = Tasks
+        model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']

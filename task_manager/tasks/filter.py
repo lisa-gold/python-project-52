@@ -1,5 +1,5 @@
 import django_filters
-from task_manager.tasks.models import Tasks
+from task_manager.tasks.models import Task
 from task_manager.labels.models import Label
 from django import forms
 
@@ -20,5 +20,5 @@ class TaskFilter(django_filters.FilterSet):
                                              label='Only my tasks')
 
     class Meta:
-        model = Tasks
+        model = Task
         fields = ['status', 'executor']

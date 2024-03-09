@@ -1,16 +1,16 @@
 from django.test import TestCase
 from django.core.exceptions import ObjectDoesNotExist
-from task_manager.tasks.models import Tasks
+from task_manager.tasks.models import Task
 from django.urls import reverse
 from django.contrib.auth.models import User
-from task_manager.statuses.models import Statuses
+from task_manager.statuses.models import Status
 
 
 class TasksTestCase(TestCase):
     def setUp(self):
-        Statuses.objects.create(name='completed')
-        Tasks.objects.create(name='feed the cat',
-                             status=Statuses.objects.get(name='completed'))
+        Status.objects.create(name='completed')
+        Task.objects.create(name='feed the cat',
+                            status=Status.objects.get(name='completed'))
         self.client.login(username='fred', password='secret')
 
     def test_index_page(self):
@@ -24,37 +24,21 @@ class TasksTestCase(TestCase):
 
     def test_create(self):
         self.client.login(username='fred', password='secret')
-        Tasks.objects.create(name='walk the dog',
-                             status=Statuses.objects.get(name='completed'))
-        created_task = Tasks.objects.get(name='walk the dog')
+        Task.objects.create(name='walk the dog',
+                            status=Status.objects.get(name='completed'))
+        created_task = Task.objects.get(name='walk the dog')
         self.assertEqual(created_task.status.name, 'completed')
 
     def test_update_page(self):
         self.client.login(username='fred', password='secret')
-        exist_task = Tasks.objects.get(name='feed the cat')
+        exist_task = Task.objects.get(name='feed the cat')
         response = self.client.get(reverse('tasks:update',
                                            args=[exist_task.pk]))
         self.assertEqual(response.status_code, 302)
 
-    # def test_update(self):
-    #     user = User.objects.create_user("john")
-    #     self.client.force_login(user=user)
-    #     exist_task = Tasks.objects.get(name='feed the cat')
-    #     new_task = {'name': 'walk the dog',
-    #                 'author': user,
-    #                 'status': Statuses.objects.get(name='completed')}
-    #     response = self.client.post(
-    #         reverse('tasks:update', args=[exist_task.pk]),
-    #         new_task,
-    #     )
-
-    #     # self.assertRedirects(response, reverse('tasks:index'))
-    #     updated_task = Tasks.objects.get(pk=exist_task.pk)
-    #     self.assertEqual(updated_task.name, 'walk the dog')
-
     def test_delete_page(self):
         self.client.login(username='fred', password='secret')
-        exist_task = Tasks.objects.get(name='feed the cat')
+        exist_task = Task.objects.get(name='feed the cat')
         response = self.client.get(reverse('tasks:delete',
                                            args=[exist_task.pk]))
 
@@ -63,10 +47,10 @@ class TasksTestCase(TestCase):
     def test_delete(self):
         user = User.objects.create_user("john")
         self.client.force_login(user=user)
-        exist_task = Tasks.objects.get(name='feed the cat')
+        exist_task = Task.objects.get(name='feed the cat')
         response = self.client.post(reverse('tasks:delete',
                                             args=[exist_task.pk]))
 
         self.assertRedirects(response, reverse('tasks:index'))
         with self.assertRaises(ObjectDoesNotExist):
-            Tasks.objects.get(name='feed the cat')
+            Task.objects.get(name='feed the cat')

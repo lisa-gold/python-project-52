@@ -5,7 +5,7 @@ from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 
 
-class Tasks(models.Model):
+class Task(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     author = models.ForeignKey(User,
@@ -32,4 +32,4 @@ class LabelRelationTask(models.Model):
     label = models.ForeignKey(Label,
                               on_delete=models.PROTECT,
                               null=True)
-    task = models.ForeignKey(Tasks, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
