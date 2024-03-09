@@ -2,6 +2,7 @@ import django_filters
 from task_manager.tasks.models import Task
 from task_manager.labels.models import Label
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -17,7 +18,7 @@ class TaskFilter(django_filters.FilterSet):
     is_author = django_filters.BooleanFilter(field_name='author',
                                              widget=forms.CheckboxInput,
                                              method='filter_own_tasks',
-                                             label='Only my tasks')
+                                             label=_('Only my tasks'))
 
     class Meta:
         model = Task

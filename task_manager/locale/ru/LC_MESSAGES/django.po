@@ -231,6 +231,10 @@ msgstr "Изменение статуса"
 msgid "Create task"
 msgstr "Создать задачу"
 
+#: task_manager/tasks/filter.py:21
+msgid "Only my tasks"
+msgstr "Только свои задачи"
+
 #: task_manager/templates/tasks/delete.html:7
 msgid "Delete task"
 msgstr "Удаление задачи"
