@@ -1,7 +1,7 @@
 MANAGE := poetry run python manage.py
 
 install:
-	poetry install
+	pip install -r requirements.txt
 
 test:
 	@$(MANAGE) test

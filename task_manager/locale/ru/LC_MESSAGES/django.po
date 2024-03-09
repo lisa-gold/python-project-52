@@ -171,11 +171,8 @@ msgstr "Создать"
 msgid "Delete label"
 msgstr "Удаление метки"
 
-#: task_manager/templates/labels/delete.html:11
 #: task_manager/templates/labels/index.html:29
-#: task_manager/templates/statuses/delete.html:11
 #: task_manager/templates/statuses/index.html:29
-#: task_manager/templates/tasks/delete.html:11
 #: task_manager/templates/tasks/detail.html:48
 #: task_manager/templates/tasks/index.html:44
 #: task_manager/templates/users/index.html:27
@@ -265,6 +262,9 @@ msgid "Delete user"
 msgstr "Удаление пользователя"
 
 #: task_manager/templates/users/delete.html:11
+#: task_manager/templates/labels/delete.html:11
+#: task_manager/templates/tasks/delete.html:11
+#: task_manager/templates/statuses/delete.html:11
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
