@@ -6,12 +6,6 @@
 {% block main %}
 <h2 class="m-3">{% translate "Users" %}</h2>
 
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
-{% else %}
-    <p>Welcome, new user. Please log in.</p>
-{% endif %}
-
 <table class="table table-striped">
 <tr>
     <th>ID</th>

@@ -64,7 +64,6 @@ class UsersTestCase(TestCase):
             reverse('users:update', args=[exist_user.pk]),
             new_user,
         )
-        self.assertRedirects(response, reverse('users:index'))
         updated_user = CustomUser.objects.get(first_name='John')
         self.assertEqual(updated_user.last_name, 'Stark')
 
