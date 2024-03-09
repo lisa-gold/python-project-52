@@ -23,10 +23,10 @@
         <td>{{ status_data.created_at|date:"d.m.Y H:i" }}</td>
         <td>
             <a href="{% url 'statuses:update' status_data.id %}">
-            {% translate "update" %}
+            {% translate "Update" %}
             </a>
         <br>
-            <a href="{% url 'statuses:delete' status_data.id %}">{% translate "delete" %}</a>
+            <a href="{% url 'statuses:delete' status_data.id %}">{% translate "Delete" %}</a>
         </td>
     </tr>
     {% endfor %}

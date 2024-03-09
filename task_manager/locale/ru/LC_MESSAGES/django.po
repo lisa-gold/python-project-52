@@ -146,13 +146,6 @@ msgstr "Создать"
 msgid "Delete label"
 msgstr "Удаление метки"
 
-#: task_manager/templates/labels/delete.html:11
-#: task_manager/templates/statuses/delete.html:11
-#: task_manager/templates/tasks/delete.html:11
-#: task_manager/templates/users/delete.html:11
-msgid "Delete"
-msgstr "Удалить"
-
 #: task_manager/templates/labels/index.html:9
 msgid "Labeles"
 msgstr "Метки"
@@ -175,16 +168,21 @@ msgstr "Дата создания"
 #: task_manager/templates/tasks/detail.html:46
 #: task_manager/templates/tasks/index.html:41
 #: task_manager/templates/users/index.html:30
-msgid "update"
-msgstr "изменить"
+#: task_manager/templates/users/update.html:12
+msgid "Update"
+msgstr "Изменить"
 
 #: task_manager/templates/labels/index.html:29
 #: task_manager/templates/statuses/index.html:29
 #: task_manager/templates/tasks/detail.html:48
 #: task_manager/templates/tasks/index.html:44
 #: task_manager/templates/users/index.html:33
-msgid "delete"
-msgstr "удалить"
+#: task_manager/templates/labels/delete.html:11
+#: task_manager/templates/statuses/delete.html:11
+#: task_manager/templates/tasks/delete.html:11
+#: task_manager/templates/users/delete.html:11
+msgid "Delete"
+msgstr "Удалить"
 
 #: task_manager/templates/labels/update.html:7
 msgid "Edit label"
@@ -272,10 +270,6 @@ msgstr "Дата создания"
 #: task_manager/templates/users/update.html:7
 msgid "Edit user"
 msgstr "Изменение пользователя"
-
-#: task_manager/templates/users/update.html:12
-msgid "Update"
-msgstr "Изменить"
 
 #: task_manager/users/views.py:21
 msgid "Successfully registered!"
