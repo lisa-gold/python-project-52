@@ -82,13 +82,13 @@ msgstr "Описание"
 msgid "Author"
 msgstr "Автор"
 
-#: task_manager/tasks/models.py:24
+#: task_manager/tasks/models.py:26
 #: task_manager/templates/tasks/detail.html:21
 #: task_manager/templates/tasks/index.html:28
 msgid "Executor"
 msgstr "Исполнитель"
 
-#: task_manager/tasks/models.py:28
+#: task_manager/tasks/models.py:30
 #: task_manager/templates/base.html:32
 #: task_manager/templates/tasks/detail.html:34
 msgid "Labels"
@@ -244,7 +244,7 @@ msgstr "Просмотр задачи"
 
 #: task_manager/templates/tasks/detail.html:25
 #: task_manager/templates/tasks/index.html:26
-#: task_manager/tasks/models.py:18
+#: task_manager/tasks/models.py:20
 msgid "Status"
 msgstr "Статус"
 

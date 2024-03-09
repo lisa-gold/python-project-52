@@ -51,7 +51,7 @@ class LabelDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def render_to_response(self, context, **response_kwargs):
         label = super(LabelDelete, self).get_object()
-        if label.tasks_set.all():
+        if label.task_set.all():
             denied_message = _("Label is in use, you cannot delete it!")
             messages.warning(self.request, denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
