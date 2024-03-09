@@ -21,7 +21,6 @@ class Tasks(models.Model):
                                  related_name='tasks_to_do')
     labels = models.ManyToManyField(Labels,
                                     through='LabelRelationTask',
-                                    null=True,
                                     blank=True,)
     created_at = models.DateTimeField(auto_now_add=True)
 

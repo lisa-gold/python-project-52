@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-09 09:51+0000\n"
+"POT-Creation-Date: 2024-03-09 10:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,8 +20,7 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/labels/views.py:13
-#: task_manager/statuses/views.py:14
+#: task_manager/labels/views.py:13 task_manager/statuses/views.py:14
 #: task_manager/tasks/views.py:20
 msgid "To open this page log in!"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
@@ -75,8 +74,6 @@ msgid "Task successfully updated!"
 msgstr "Задача успешно изменена"
 
 #: task_manager/tasks/views.py:70
-#, fuzzy
-#| msgid "Successfully logged in!"
 msgid "Task successfully deleted!"
 msgstr "Задача успешно удалена"
 
@@ -113,6 +110,7 @@ msgid "Log out"
 msgstr "Выход"
 
 #: task_manager/templates/base.html:47
+#: task_manager/templates/login.html:7
 msgid "Log in"
 msgstr "Вход"
 
@@ -120,10 +118,6 @@ msgstr "Вход"
 #: task_manager/templates/users/create.html:7
 msgid "Registration"
 msgstr "Регистрация"
-
-#: task_manager/templates/users/create.html:12
-msgid "Sign up"
-msgstr "Зарегистрировать"
 
 #: task_manager/templates/index.html:10
 msgid "Hello from Hexlet!"
@@ -202,7 +196,7 @@ msgstr "Изменение метки"
 msgid "Edit"
 msgstr "Изменить"
 
-#: task_manager/templates/login.html:7 task_manager/templates/login.html:13
+#: task_manager/templates/login.html:13
 msgid "Sign in"
 msgstr "Войти"
 
@@ -255,6 +249,10 @@ msgstr "Показать"
 msgid "Edit task"
 msgstr "Изменение задачи"
 
+#: task_manager/templates/users/create.html:12
+msgid "Sign up"
+msgstr "Зарегистрировать"
+
 #: task_manager/templates/users/delete.html:7
 msgid "Delete user"
 msgstr "Удаление пользователя"
@@ -300,9 +298,7 @@ msgid "You cannot delete other users!"
 msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/users/views.py:55
-msgid ""
-"You cannot delete this user because                              he/she has "
-"a task to execute!"
+msgid "You cannot delete this user because                              he/she has a task to execute!"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
 #: task_manager/views.py:28
