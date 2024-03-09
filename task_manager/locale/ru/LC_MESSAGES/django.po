@@ -110,7 +110,8 @@ msgid "Log out"
 msgstr "Выход"
 
 #: task_manager/templates/base.html:47
-msgid "Log in"
+#: task_manager/templates/login.html:7
+msgid "Login"
 msgstr "Вход"
 
 #: task_manager/templates/base.html:50
@@ -194,10 +195,6 @@ msgstr "Изменение метки"
 #: task_manager/templates/tasks/update.html:12
 msgid "Edit"
 msgstr "Изменить"
-
-#: task_manager/templates/login.html:7
-msgid "Log in"
-msgstr "Вход"
 
 #: task_manager/templates/login.html:13
 msgid "Sign in"
