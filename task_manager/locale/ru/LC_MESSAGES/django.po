@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-09 10:52+0000\n"
+"POT-Creation-Date: 2024-03-09 11:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-
 #: task_manager/labels/views.py:13 task_manager/statuses/views.py:14
 #: task_manager/tasks/views.py:20
 msgid "To open this page log in!"
@@ -109,8 +108,7 @@ msgstr "Задачи"
 msgid "Log out"
 msgstr "Выход"
 
-#: task_manager/templates/base.html:47
-#: task_manager/templates/login.html:7
+#: task_manager/templates/base.html:47 task_manager/templates/login.html:7
 msgid "Log in"
 msgstr "Вход"
 
@@ -275,7 +273,7 @@ msgstr "Изменение пользователя"
 
 #: task_manager/templates/users/update.html:12
 msgid "Update"
-msgstr "изменить"
+msgstr "Изменить"
 
 #: task_manager/users/views.py:21
 msgid "Successfully registered!"
