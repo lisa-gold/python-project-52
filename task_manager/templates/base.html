@@ -37,7 +37,7 @@
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <input type="submit" class="nav-link btn">{% translate "Log out" %}</input>
+                            <input type="submit" class="nav-link btn" value="{% translate 'Log out' %}"/>
                         </form>
                     </li>
                     
