@@ -106,7 +106,7 @@ msgid "Tasks"
 msgstr "Задачи"
 
 #: task_manager/templates/base.html:40
-msgid "Log out"
+msgid "Log out "
 msgstr "Выход"
 
 #: task_manager/templates/base.html:47
