@@ -153,6 +153,7 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "static"
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
