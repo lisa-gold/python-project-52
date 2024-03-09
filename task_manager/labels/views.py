@@ -1,5 +1,5 @@
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
-from task_manager.labels.models import Labels
+from task_manager.labels.models import Label
 from task_manager.labels.forms import LabelForm, LabelUpdateForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -22,12 +22,12 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 
 class IndexView(CustomLoginRequiredMixin, ListView):
-    model = Labels
+    model = Label
     template_name = 'labels/index.html'
 
 
 class LabelCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Labels
+    model = Label
     form_class = LabelForm
     template_name = 'labels/create.html'
     success_url = reverse_lazy('labels:index')
@@ -35,7 +35,7 @@ class LabelCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class LabelUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Labels
+    model = Label
     form_class = LabelUpdateForm
     template_name = 'labels/update.html'
     success_url = reverse_lazy('labels:index')
@@ -43,7 +43,7 @@ class LabelUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class LabelDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
-    model = Labels
+    model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully deleted!')

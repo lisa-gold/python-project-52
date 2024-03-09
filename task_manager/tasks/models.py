@@ -1,8 +1,8 @@
 from django.db import models
-from task_manager.users.models import Users
+from task_manager.users.models import CustomUser
 from django.contrib.auth.models import User
-from task_manager.statuses.models import Statuses
-from task_manager.labels.models import Labels
+from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
 
 
 class Tasks(models.Model):
@@ -13,13 +13,13 @@ class Tasks(models.Model):
                                related_name='tasks',
                                blank=True,
                                null=True)
-    status = models.ForeignKey(Statuses, on_delete=models.PROTECT)
-    executor = models.ForeignKey(Users,
+    status = models.ForeignKey(Status, on_delete=models.PROTECT)
+    executor = models.ForeignKey(CustomUser,
                                  on_delete=models.PROTECT,
                                  null=True,
                                  blank=True,
                                  related_name='tasks_to_do')
-    labels = models.ManyToManyField(Labels,
+    labels = models.ManyToManyField(Label,
                                     through='LabelRelationTask',
                                     blank=True,)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,7 +29,7 @@ class Tasks(models.Model):
 
 
 class LabelRelationTask(models.Model):
-    label = models.ForeignKey(Labels,
+    label = models.ForeignKey(Label,
                               on_delete=models.PROTECT,
                               null=True)
     task = models.ForeignKey(Tasks, on_delete=models.CASCADE)

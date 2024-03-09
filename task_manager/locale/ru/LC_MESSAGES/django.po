@@ -180,9 +180,12 @@ msgstr "Изменить"
 #: task_manager/templates/labels/delete.html:11
 #: task_manager/templates/statuses/delete.html:11
 #: task_manager/templates/tasks/delete.html:11
-#: task_manager/templates/users/delete.html:11
 msgid "Delete"
 msgstr "Удалить"
+
+#: task_manager/templates/users/delete.html:11
+msgid "Yes, delete"
+msgstr "Да, удалить"
 
 #: task_manager/templates/labels/update.html:7
 msgid "Edit label"

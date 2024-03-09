@@ -1,5 +1,5 @@
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
-from task_manager.statuses.models import Statuses
+from task_manager.statuses.models import Status
 from task_manager.statuses.forms import StatusForm, StatusUpdateForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -22,13 +22,13 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 
 class IndexView(CustomLoginRequiredMixin, ListView):
-    model = Statuses
+    model = Status
     template_name = 'statuses/index.html'
     login_url = reverse_lazy('login')
 
 
 class StatusCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Statuses
+    model = Status
     form_class = StatusForm
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses:index')
@@ -36,7 +36,7 @@ class StatusCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Statuses
+    model = Status
     form_class = StatusUpdateForm
     template_name = 'statuses/update.html'
     success_url = reverse_lazy('statuses:index')
@@ -44,7 +44,7 @@ class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
-    model = Statuses
+    model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses:index')
     success_message = _('Status successfully deleted!')

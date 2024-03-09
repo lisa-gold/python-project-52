@@ -1,9 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from task_manager.users.models import Users
+from django.contrib.auth.forms import UserCreationForm
+from task_manager.users.models import CustomUser
 
 
 class UserForm(UserCreationForm):
 
     class Meta:
-        model = Users
+        model = CustomUser
         fields = ['first_name', 'last_name', 'username']
