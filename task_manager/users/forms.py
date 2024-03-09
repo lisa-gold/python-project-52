@@ -7,10 +7,3 @@ class UserForm(UserCreationForm):
     class Meta:
         model = Users
         fields = ['first_name', 'last_name', 'username']
-
-
-class UserUpdateForm(UserChangeForm):
-
-    class Meta:
-        model = Users
-        fields = ['first_name', 'last_name']
