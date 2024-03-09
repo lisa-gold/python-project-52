@@ -6,11 +6,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     login_url = reverse_lazy('login')
-    permission_denied_message = 'To open this page log in!'
+    permission_denied_message = _('To open this page log in!')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -31,7 +32,7 @@ class StatusCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = StatusForm
     template_name = 'statuses/create.html'
     success_url = reverse_lazy('statuses:index')
-    success_message = 'Status successfully added!'
+    success_message = _('Status successfully added!')
 
 
 class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -39,20 +40,20 @@ class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = StatusUpdateForm
     template_name = 'statuses/update.html'
     success_url = reverse_lazy('statuses:index')
-    success_message = 'Status successfully updated!'
+    success_message = _('Status successfully updated!')
 
 
 class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Statuses
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses:index')
-    success_message = 'Status successfully deleted!'
+    success_message = _('Status successfully deleted!')
     redirect_field_name = reverse_lazy('statuses:index')
 
     def render_to_response(self, context, **response_kwargs):
         status = super(StatusDelete, self).get_object()
         if status.tasks_set.all():
-            denied_message = "Status is in use, you cannot delete it!"
+            denied_message = _("Status is in use, you cannot delete it!")
             messages.warning(self.request, denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         return super().render_to_response(context, **response_kwargs)

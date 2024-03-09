@@ -13,10 +13,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django_filters.views import FilterView
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
-    permission_denied_message = 'To open this page log in!'
+    permission_denied_message = _('To open this page log in!')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -44,7 +45,7 @@ class TaskCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = TaskForm
     template_name = 'tasks/create.html'
     success_url = reverse_lazy('tasks:index')
-    success_message = 'Task successfully added!'
+    success_message = _('Task successfully added!')
     login_url = reverse_lazy('login')
 
     def form_valid(self, form):
@@ -58,7 +59,7 @@ class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = TaskUpdateForm
     template_name = 'tasks/update.html'
     success_url = reverse_lazy('tasks:index')
-    success_message = 'Task successfully updated!'
+    success_message = _('Task successfully updated!')
     login_url = reverse_lazy('login')
 
 
@@ -66,14 +67,14 @@ class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Tasks
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks:index')
-    success_message = 'Task successfully deleted!'
+    success_message = _('Task successfully deleted!')
     login_url = reverse_lazy('login')
     redirect_field_name = reverse_lazy('tasks:index')
 
     def render_to_response(self, context, **response_kwargs):
         task = super(TaskDelete, self).get_object()
         if not task.author == self.request.user:
-            permission_denied_message = "Only task's author can delete it!"
+            permission_denied_message = _("Only task's author can delete it!")
             messages.warning(self.request, permission_denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         return super().render_to_response(context, **response_kwargs)

@@ -6,10 +6,11 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
-    permission_denied_message = 'To open this page log in!'
+    permission_denied_message = _('To open this page log in!')
     login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
@@ -30,7 +31,7 @@ class LabelCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = LabelForm
     template_name = 'labels/create.html'
     success_url = reverse_lazy('labels:index')
-    success_message = 'Label successfully added!'
+    success_message = _('Label successfully added!')
 
 
 class LabelUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -38,20 +39,20 @@ class LabelUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = LabelUpdateForm
     template_name = 'labels/update.html'
     success_url = reverse_lazy('labels:index')
-    success_message = 'Label successfully updated!'
+    success_message = _('Label successfully updated!')
 
 
 class LabelDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Labels
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels:index')
-    success_message = 'Label successfully deleted!'
+    success_message = _('Label successfully deleted!')
     redirect_field_name = reverse_lazy('labels:index')
 
     def render_to_response(self, context, **response_kwargs):
         label = super(LabelDelete, self).get_object()
         if label.tasks_set.all():
-            denied_message = "Label is in use, you cannot delete it!"
+            denied_message = _("Label is in use, you cannot delete it!")
             messages.warning(self.request, denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         return super().render_to_response(context, **response_kwargs)
