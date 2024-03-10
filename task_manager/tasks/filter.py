@@ -12,8 +12,8 @@ class TaskFilter(django_filters.FilterSet):
             return queryset.filter(author=self.request.user)
         return queryset
 
-    label = django_filters.ModelChoiceFilter(
-                                             queryset=Label.objects.all(),
+    label = django_filters.ModelChoiceFilter(queryset=Label.objects.all(),
+                                             label=_('Label'),
                                              field_name='labels')
     is_author = django_filters.BooleanFilter(field_name='author',
                                              widget=forms.CheckboxInput,
