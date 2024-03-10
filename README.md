@@ -31,6 +31,7 @@ https://python-project-52-kfee.onrender.com/
 |[rollbar](https://rollbar.com/lizik.gold/)                                   | "Discover, predict, and resolve errors in real-time" |
 
 ### Example of .env
+|                               |
 |-------------------------------|
 |SECRET_KEY = 'secret'|
 |DEBUG = 'True'|
