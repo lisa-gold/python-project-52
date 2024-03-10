@@ -1,9 +1,7 @@
-from django.views.generic import (
-                                  CreateView,
+from django.views.generic import (CreateView,
                                   DeleteView,
                                   UpdateView,
-                                  DetailView
-                                 )
+                                  DetailView)
 from task_manager.tasks.models import Task
 from task_manager.tasks.forms import TaskForm, TaskUpdateForm
 from task_manager.tasks.filter import TaskFilter

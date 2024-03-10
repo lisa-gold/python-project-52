@@ -9,12 +9,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 
 
-MESSAGE_TAGS = {
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
-        }
+MESSAGE_TAGS = {messages.INFO: 'alert-info',
+                messages.SUCCESS: 'alert-success',
+                messages.WARNING: 'alert-warning',
+                messages.ERROR: 'alert-danger'}
 
 
 class IndexView(TemplateView):
