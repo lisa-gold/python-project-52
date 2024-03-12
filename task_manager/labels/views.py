@@ -29,7 +29,11 @@ class IndexView(CustomLoginRequiredMixin, ListView):
 class LabelCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     form_class = LabelForm
-    template_name = 'labels/create.html'
+    template_name = 'form.html'
+    extra_context = {
+        'title': _('Create label'),
+        'btn_text': _('Create'),
+        'btn_class': _('btn-primary')}
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully added!')
 
@@ -37,14 +41,22 @@ class LabelCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
 class LabelUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelUpdateForm
-    template_name = 'labels/update.html'
+    template_name = 'form.html'
+    extra_context = {
+        'title': _('Edit label'),
+        'btn_text': _('Edit'),
+        'btn_class': _('btn-primary')}
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully updated!')
 
 
 class LabelDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Label
-    template_name = 'labels/delete.html'
+    template_name = 'form.html'
+    extra_context = {
+        'title': _('Delete label'),
+        'btn_text': _('Yes, delete'),
+        'btn_class': _('btn-danger')}
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully deleted!')
     redirect_field_name = reverse_lazy('labels:index')

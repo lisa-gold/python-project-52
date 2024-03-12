@@ -41,7 +41,11 @@ class TaskDetail(DetailView):
 class TaskCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
     form_class = TaskForm
-    template_name = 'tasks/create.html'
+    template_name = 'form.html'
+    extra_context = {
+        'title': _('Create task'),
+        'btn_text': _('Create'),
+        'btn_class': _('btn-primary')}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully added!')
     login_url = reverse_lazy('login')
@@ -55,7 +59,11 @@ class TaskCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
 class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Task
     form_class = TaskUpdateForm
-    template_name = 'tasks/update.html'
+    template_name = 'form.html'
+    extra_context = {
+        'title': _('Edit task'),
+        'btn_text': _('Edit'),
+        'btn_class': _('btn-primary')}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully updated!')
     login_url = reverse_lazy('login')
@@ -63,7 +71,11 @@ class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Task
-    template_name = 'tasks/delete.html'
+    template_name = 'form.html'
+    extra_context = {
+        'title': _('Delete task'),
+        'btn_text': _('Yes, delete'),
+        'btn_class': _('btn-danger')}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully deleted!')
     login_url = reverse_lazy('login')
