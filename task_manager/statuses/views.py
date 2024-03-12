@@ -34,7 +34,7 @@ class StatusCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     extra_context = {
         'title': _('Create status'),
         'btn_text': _('Create'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('statuses:index')
     success_message = _('Status successfully added!')
 
@@ -46,7 +46,7 @@ class StatusUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     extra_context = {
         'title': _('Edit status'),
         'btn_text': _('Edit'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('statuses:index')
     success_message = _('Status successfully updated!')
 
@@ -57,7 +57,7 @@ class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': _('Delete status'),
         'btn_text': _('Yes, delete'),
-        'btn_class': _('btn-danger')}
+        'btn_class': 'btn-danger'}
     success_url = reverse_lazy('statuses:index')
     success_message = _('Status successfully deleted!')
     redirect_field_name = reverse_lazy('statuses:index')

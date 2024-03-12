@@ -33,7 +33,7 @@ class LabelCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     extra_context = {
         'title': _('Create label'),
         'btn_text': _('Create'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully added!')
 
@@ -45,7 +45,7 @@ class LabelUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     extra_context = {
         'title': _('Edit label'),
         'btn_text': _('Edit'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully updated!')
 
@@ -56,7 +56,7 @@ class LabelDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': _('Delete label'),
         'btn_text': _('Yes, delete'),
-        'btn_class': _('btn-danger')}
+        'btn_class': 'btn-danger'}
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully deleted!')
     redirect_field_name = reverse_lazy('labels:index')

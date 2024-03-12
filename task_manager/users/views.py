@@ -34,7 +34,7 @@ class UserCreate(SuccessMessageMixin, CreateView):
     extra_context = {
         'title': _('Registration'),
         'btn_text': _('Sign up'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('login')
     success_message = _('Successfully registered!')
 
@@ -46,7 +46,7 @@ class UserUpdate(SuccessMessageMixin, UpdateView, Permission):
     extra_context = {
         'title': _('Edit user'),
         'btn_text': _('Update'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_message = _('Successfully updated!')
     success_url = reverse_lazy('users:index')
     permission_denied_message = _("You cannot edit other users!")
@@ -67,7 +67,7 @@ class UserDelete(SuccessMessageMixin, DeleteView, Permission):
     extra_context = {
         'title': _('Delete user'),
         'btn_text': _('Yes, delete'),
-        'btn_class': _('btn-danger')}
+        'btn_class': 'btn-danger'}
     success_message = _('Successfully deleted!')
     success_url = reverse_lazy('users:index')
     permission_denied_message = _("You cannot delete other users!")

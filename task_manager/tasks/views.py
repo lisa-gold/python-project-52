@@ -45,7 +45,7 @@ class TaskCreate(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     extra_context = {
         'title': _('Create task'),
         'btn_text': _('Create'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully added!')
     login_url = reverse_lazy('login')
@@ -63,7 +63,7 @@ class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     extra_context = {
         'title': _('Edit task'),
         'btn_text': _('Edit'),
-        'btn_class': _('btn-primary')}
+        'btn_class': 'btn-primary'}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully updated!')
     login_url = reverse_lazy('login')
@@ -75,7 +75,7 @@ class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': _('Delete task'),
         'btn_text': _('Yes, delete'),
-        'btn_class': _('btn-danger')}
+        'btn_class': 'btn-danger'}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully deleted!')
     login_url = reverse_lazy('login')
