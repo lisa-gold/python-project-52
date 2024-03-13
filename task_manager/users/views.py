@@ -35,7 +35,7 @@ class UserHasTask(UserPassesTestMixin):
 
     def test_func_tasks(self):
         return self.get_object().tasks.all() or\
-               self.get_object().tasks_to_do.all()
+            self.get_object().tasks_to_do.all()
 
     def handle_no_permission_tasks(self):
         if self.raise_exception or self.request.user.is_authenticated:
