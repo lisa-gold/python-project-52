@@ -1,0 +1,21 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+                   "password": "password!12",
+                   "last_login": "2024-03-13T06:51:40.188Z",
+                   "is_superuser": false,
+                   "username": "wolf123",
+                   "first_name": "John",
+                   "last_name": "Snow",
+                   "email": "",
+                   "is_staff": false,
+                   "is_active": true,
+                   "date_joined": "2024-03-10T07:46:09.932Z",
+                   "groups": [],
+                   "user_permissions": []
+        }
+    }
+]
+                

@@ -13,10 +13,3 @@ class TaskForm(ModelForm):
         if not self.cleaned_data['author']:
             return CustomUser()
         return self.cleaned_data['author']
-
-
-class TaskUpdateForm(ModelForm):
-
-    class Meta:
-        model = Task
-        fields = ['name', 'description', 'status', 'executor', 'labels']

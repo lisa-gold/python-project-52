@@ -71,13 +71,6 @@ msgstr "Удаление метки"
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: task_manager/labels/views.py:59
-#: task_manager/statuses/views.py:60
-#: task_manager/tasks/views.py:78
-#: task_manager/users/views.py:70
-msgid "btn-danger"
-msgstr ""
-
 #: task_manager/labels/views.py:61
 msgid "Label successfully deleted!"
 msgstr "Метка успешно удалена"

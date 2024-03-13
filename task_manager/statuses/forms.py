@@ -7,10 +7,3 @@ class StatusForm(ModelForm):
     class Meta:
         model = Status
         fields = ['name']
-
-
-class StatusUpdateForm(ModelForm):
-
-    class Meta:
-        model = Status
-        fields = ['name']

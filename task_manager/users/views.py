@@ -4,8 +4,9 @@ from task_manager.users.forms import UserForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 class IndexView(ListView):
@@ -13,18 +14,34 @@ class IndexView(ListView):
     template_name = 'users/index.html'
 
 
-class Permission:
+class OwnerPermission(UserPassesTestMixin):
     redirect_field_name = reverse_lazy('users:index')
     permission_denied_message = ''
-    denied_message = ''
 
-    def check_permission(self, context, user_to_modify, **response_kwargs):
-        if not user_to_modify.id == self.request.user.id:
+    def test_func(self):
+        return self.get_object().id == self.request.user.id
+
+    def handle_no_permission(self):
+        if self.raise_exception or self.request.user.is_authenticated:
             messages.warning(self.request, self.permission_denied_message)
-            return HttpResponseRedirect(self.redirect_field_name)
-        if user_to_modify.tasks.all() or user_to_modify.tasks_to_do.all():
+            return redirect(self.redirect_field_name)
+        return super().handle_no_permission()
+
+
+class UserHasTask(UserPassesTestMixin):
+    redirect_field_name = reverse_lazy('users:index')
+    denied_message = _("You cannot delete this user because\
+                       he/she has a task to execute!")
+
+    def test_func_tasks(self):
+        return self.get_object().tasks.all() or\
+               self.get_object().tasks_to_do.all()
+
+    def handle_no_permission_tasks(self):
+        if self.raise_exception or self.request.user.is_authenticated:
             messages.warning(self.request, self.denied_message)
-            return HttpResponseRedirect(self.redirect_field_name)
+            return redirect(self.redirect_field_name)
+        return super().handle_no_permission()
 
 
 class UserCreate(SuccessMessageMixin, CreateView):
@@ -39,7 +56,7 @@ class UserCreate(SuccessMessageMixin, CreateView):
     success_message = _('Successfully registered!')
 
 
-class UserUpdate(SuccessMessageMixin, UpdateView, Permission):
+class UserUpdate(SuccessMessageMixin, UpdateView, OwnerPermission):
     model = CustomUser
     form_class = UserForm
     template_name = 'form.html'
@@ -51,17 +68,13 @@ class UserUpdate(SuccessMessageMixin, UpdateView, Permission):
     success_url = reverse_lazy('users:index')
     permission_denied_message = _("You cannot edit other users!")
 
-    def render_to_response(self, context, **response_kwargs):
-        user_to_update = super(UserUpdate, self).get_object()
-        is_permission = super().check_permission(context,
-                                                 user_to_update,
-                                                 **response_kwargs)
-        if is_permission:
-            return is_permission
-        return super().render_to_response(context, **response_kwargs)
+    def dispatch(self, context, **response_kwargs):
+        if not super().test_func():
+            return super().handle_no_permission()
+        return super().dispatch(context, **response_kwargs)
 
 
-class UserDelete(SuccessMessageMixin, DeleteView, Permission):
+class UserDelete(SuccessMessageMixin, DeleteView, OwnerPermission, UserHasTask):
     model = CustomUser
     template_name = 'form.html'
     extra_context = {
@@ -71,14 +84,10 @@ class UserDelete(SuccessMessageMixin, DeleteView, Permission):
     success_message = _('Successfully deleted!')
     success_url = reverse_lazy('users:index')
     permission_denied_message = _("You cannot delete other users!")
-    denied_message = _("You cannot delete this user because\
-                       he/she has a task to execute!")
 
-    def render_to_response(self, context, **response_kwargs):
-        user_to_delete = super(UserDelete, self).get_object()
-        is_permission = super().check_permission(context,
-                                                 user_to_delete,
-                                                 **response_kwargs)
-        if is_permission:
-            return is_permission
-        return super().render_to_response(context, **response_kwargs)
+    def dispatch(self, context, **response_kwargs):
+        if not super().test_func():
+            return super().handle_no_permission()
+        if super().test_func_tasks():
+            return super().handle_no_permission_tasks()
+        return super().dispatch(context, **response_kwargs)

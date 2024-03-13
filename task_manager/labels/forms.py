@@ -7,10 +7,3 @@ class LabelForm(ModelForm):
     class Meta:
         model = Label
         fields = ['name']
-
-
-class LabelUpdateForm(ModelForm):
-
-    class Meta:
-        model = Label
-        fields = ['name']

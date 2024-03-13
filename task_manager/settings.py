@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Rollbar dettings
+# Rollbar settings
 
 ROLLBAR = {
     'access_token': ROLLBAR_TOKEN,
@@ -147,7 +147,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'task_manager/locale'), )
 
 
 # Static files (CSS, JavaScript, Images)
@@ -167,3 +167,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "index"
 
 LOGOUT_REDIRECT_URL = "index"
+
+# Tests settings
+
+FIXTURE_DIRS = [os.path.join(BASE_DIR, 'task_manager/tests/fixtures')]

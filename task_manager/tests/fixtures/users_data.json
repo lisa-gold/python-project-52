@@ -1,0 +1,27 @@
+{    
+    "user_exisying": {
+               "pk": 1,
+               "first_name": "John",
+               "last_name": "Snow",
+               "username": "wolf",
+               "password1": "password!12",
+               "password2": "password!12",
+               "date_joined": "2024-03-10T07:46:09.932Z"
+    },
+    "user_updated": {
+                     "pk": 1,
+                     "first_name": "John",
+                     "last_name": "Stark",
+                     "username": "wolf",
+                     "password1": "password!12",
+                     "password2": "password!12"
+    },
+    "user_new": {
+                 "pk": 2,
+                 "first_name": "Luke",
+                 "last_name": "Skywalker",
+                 "username": "neo",
+                 "password1": "!12password",
+                 "password2": "!12password"
+    }
+}
