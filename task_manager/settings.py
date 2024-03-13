@@ -97,7 +97,7 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
+if not DEBUG or DATABASE_URL:
     DATABASES['default'].update(dj_database_url.config(default=DATABASE_URL,
                                                        conn_max_age=600))
 
