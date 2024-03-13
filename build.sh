@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Exit on error
-set -o errexit
+# set -o errexit
 
-# Install 
-pip install -r requirements.txt
+# # Install 
+# pip install -r requirements.txt
 
-# Convert static asset files
-python manage.py collectstatic --no-input
+# # Convert static asset files
+# python manage.py collectstatic --no-input
 
-# Apply any outstanding database migrations
-python manage.py migrate
+# # Apply any outstanding database migrations
+# python manage.py migrate

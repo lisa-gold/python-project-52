@@ -1,12 +1,13 @@
 MANAGE := poetry run python manage.py
 
 install:
-	pip install -r requirements.txt
+	poetry install
 
 test:
 	@$(MANAGE) test
 
 start:
+	poetry install
 	@$(MANAGE) migrate
 	python -m gunicorn task_manager.asgi:application -k uvicorn.workers.UvicornWorker
 
