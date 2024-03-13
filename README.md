@@ -38,3 +38,18 @@ https://python-project-52-kfee.onrender.com/
 | DEBUG = 'True'|
 | DATABASE_URL = 'postgresql:...'|
 | ROLLBAR_TOKEN = 'token'|
+
+### Installation
+<pre>
+# clone the repository
+$ git cone https://github.com/lisa-gold/python-project-52.git
+
+# change the working directory
+$ cd python-project-52
+
+# start the application
+$ make start
+
+# Open http://127.0.0.1:8000/
+</pre>
+

@@ -18,7 +18,8 @@ shell:
 	@$(MANAGE) shell_plus
 
 lint:
-	@poetry run flake8 task_manager
+	poetry run flake8 task_manager
 
 test-coverage:
+	poetry run coverage run ./manage.py test
 	poetry run coverage xml
