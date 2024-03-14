@@ -41,21 +41,22 @@ class TasksTestCase(TestCase):
         response = self.client.get(reverse('tasks:index'))
         self.assertEqual(response.status_code, 200)
 
-    # def test_create(self):
-    #     self.client.force_login(user=CustomUser.objects.get(first_name='Sara'))
-    #     response = self.client.get(reverse('tasks:create'))
-    #     self.assertEqual(response.status_code, 200)
+    def test_create(self):
+        self.client.force_login(user=CustomUser.objects.get(first_name='Sara'))
+        response_get = self.client.get(reverse('tasks:create'))
+        self.assertEqual(response_get.status_code, 200)
 
-    #     new_task = {'name': 'walk the dog',
-    #                 'status': Status.objects.get(name='completed'),
-    #                 'author': CustomUser.objects.get(first_name='Sara')}
-    #     response = self.client.post(reverse('tasks:create'), new_task)
-    #     messages = list(get_messages(response.wsgi_request))
-    #     created_task = Task.objects.get(name='walk the dog')
-    #     self.assertEqual(messages[0].message, 'Задача успешно создана')
-    #     self.assertEqual(created_task.name, 'walk the dog')
-    #     self.assertRedirects(response, reverse('tasks:index'))
-    #     self.assertEqual(created_task.status.name, 'completed')
+        new_task = {'name': 'walk the dog',
+                    'status': Status.objects.get(name='completed').pk}
+        response = self.client.post(reverse('tasks:create'), new_task)
+        messages = list(get_messages(response.wsgi_request))
+        created_task = Task.objects.get(name='walk the dog')
+        count = Task.objects.all().count()
+        self.assertEqual(count, 2)
+        self.assertEqual(messages[0].message, 'Задача успешно создана')
+        self.assertEqual(created_task.name, 'walk the dog')
+        self.assertRedirects(response, reverse('tasks:index'))
+        self.assertEqual(created_task.status.name, 'completed')
 
     def test_update(self):
         self.client.force_login(user=CustomUser.objects.get(first_name='Sara'))
@@ -65,17 +66,17 @@ class TasksTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
         new_task = {'name': 'walk the dog',
-                    'status': Status.objects.get(name='completed')}
+                    'status': Status.objects.get(name='completed').pk}
         response = self.client.post(
             reverse('tasks:update', args=[exist_task.pk]),
             new_task,
         )
-        # messages = list(get_messages(response.wsgi_request))
+        messages = list(get_messages(response.wsgi_request))
 
-        # self.assertRedirects(response, reverse('tasks:index'))
-        # updated_task = Task.objects.get(pk=exist_task.pk)
-        # self.assertEqual(updated_task.name, 'walk the dog')
-        # self.assertEqual(messages[0].message, 'Задача успешно изменена')
+        self.assertRedirects(response, reverse('tasks:index'))
+        updated_task = Task.objects.get(pk=exist_task.pk)
+        self.assertEqual(updated_task.name, 'walk the dog')
+        self.assertEqual(messages[0].message, 'Задача успешно изменена')
 
     def test_delete(self):
         self.client.force_login(user=CustomUser.objects.get(first_name='Sara'))
