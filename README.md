@@ -31,7 +31,7 @@ https://python-project-52-kfee.onrender.com/
 | [rollbar](https://rollbar.com/)                                             | "Discover, predict, and resolve errors in real-time" |
 | [gettext](https://docs.python.org/3/library/gettext.html)                   | "The gettext module provides internationalization (I18N) and localization (L10N) services for your Python modules and applications" |
 
-### Example of .env
+### Example of .env (see .env.sample)
 | Variables                      |
 |-------------------------------|
 | SECRET_KEY = 'secret'|
