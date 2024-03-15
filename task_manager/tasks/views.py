@@ -7,11 +7,10 @@ from task_manager.tasks.forms import TaskForm
 from task_manager.tasks.filter import TaskFilter
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django_filters.views import FilterView
 from django.utils.translation import gettext_lazy as _
 from task_manager.mixins import CustomLoginRequiredMixin
+from task_manager.tasks.mixins import TaskAuthor
 
 
 class IndexView(CustomLoginRequiredMixin, FilterView):
@@ -53,7 +52,8 @@ class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = _('Task successfully updated!')
 
 
-class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin,
+                 TaskAuthor, DeleteView):
     model = Task
     template_name = 'form.html'
     extra_context = {
@@ -63,11 +63,3 @@ class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully deleted!')
     redirect_field_name = reverse_lazy('tasks:index')
-
-    def dispatch(self, context, **response_kwargs):
-        task = super(TaskDelete, self).get_object()
-        if not task.author == self.request.user:
-            permission_denied_message = _("Only task's author can delete it!")
-            messages.warning(self.request, permission_denied_message)
-            return HttpResponseRedirect(self.redirect_field_name)
-        return super().dispatch(context, **response_kwargs)

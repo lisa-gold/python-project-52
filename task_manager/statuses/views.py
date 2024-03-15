@@ -48,11 +48,11 @@ class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('statuses:index')
     success_message = _('Status successfully deleted!')
     redirect_field_name = reverse_lazy('statuses:index')
+    denied_message = _("Status is in use, you cannot delete it!")
 
     def dispatch(self, context, **response_kwargs):
-        status = super(StatusDelete, self).get_object()
+        status = self.get_object()
         if status.task_set.all():
-            denied_message = _("Status is in use, you cannot delete it!")
-            messages.warning(self.request, denied_message)
+            messages.warning(self.request, self.denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         return super().dispatch(context, **response_kwargs)

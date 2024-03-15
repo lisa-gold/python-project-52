@@ -48,11 +48,11 @@ class LabelDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('labels:index')
     success_message = _('Label successfully deleted!')
     redirect_field_name = reverse_lazy('labels:index')
+    denied_message = _("Label is in use, you cannot delete it!")
 
     def dispatch(self, context, **response_kwargs):
-        label = super(LabelDelete, self).get_object()
-        if label.task_set.all():
-            denied_message = _("Label is in use, you cannot delete it!")
-            messages.warning(self.request, denied_message)
+        label = self.get_object()
+        if label.task_set.exists():
+            messages.warning(self.request, self.denied_message)
             return HttpResponseRedirect(self.redirect_field_name)
         return super().dispatch(context, **response_kwargs)

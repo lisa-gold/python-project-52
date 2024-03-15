@@ -1,0 +1,81 @@
+{
+    "users": {
+        "new": {
+            "pk": 3,
+            "first_name": "Luke",
+            "last_name": "Skywalker",
+            "username": "neo",
+            "password1": "password",
+            "password2": "password"
+        },
+        "existing1": {
+            "pk": 1,
+            "first_name": "John",
+            "last_name": "Snow",
+            "username": "wolf"
+        },
+        "existing2": {
+            "pk": 2,
+            "first_name": "Sara",
+            "last_name": "Connor",
+            "username": "sara"
+        },
+        "updated": {
+            "pk": 1,
+            "first_name": "John",
+            "last_name": "Stark",
+            "username": "wolf",
+            "password1": "password",
+            "password2": "password"
+        }
+    },
+    "tasks": {
+        "new": {
+            "pk": 2,
+            "name": "refill water",
+            "status": 1,
+            "author": 1
+        },
+        "existing": {
+            "pk": 1,
+            "name": "feed the cat",
+            "status": 1,
+            "author": 1
+        },
+        "updated": {
+            "pk": 1,
+            "name": "walk the dog",
+            "status": 1,
+            "author": 1
+        }
+    },
+    "labels": {
+        "new": {
+            "pk": 2,
+            "name": "urgent"
+        },
+        "existing": {
+            "pk": 1,
+            "name": "easy"
+        },
+        "updated": {
+            "pk": 1,
+            "name": "difficult"
+        }
+    },
+    "statuses": {
+        "new": {
+            "pk": 2,
+            "name": "25%"
+        },
+        "existing": {
+            "pk": 1,
+            "name": "completed"
+        },
+        "updated": {
+            "pk": 1,
+            "name": "50%"
+        }
+    }
+
+}

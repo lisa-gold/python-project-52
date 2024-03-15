@@ -25,8 +25,8 @@ class UserHasTask(UserPassesTestMixin):
                        he/she has a task to execute!")
 
     def test_func(self):
-        return self.get_object().tasks.all() or\
-            self.get_object().tasks_to_do.all()
+        return self.get_object().tasks.exists() or\
+            self.get_object().tasks_to_do.exists()
 
     def handle_no_permission(self):
         if self.raise_exception or self.request.user.is_authenticated:
