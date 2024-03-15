@@ -25,7 +25,10 @@ class UserCreate(SuccessMessageMixin, CreateView):
     success_message = _('Successfully registered!')
 
 
-class UserUpdate(SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView, OwnerPermission):
+class UserUpdate(SuccessMessageMixin,
+                 CustomLoginRequiredMixin,
+                 UpdateView,
+                 OwnerPermission):
     model = CustomUser
     form_class = UserForm
     template_name = 'form.html'
@@ -38,7 +41,11 @@ class UserUpdate(SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView, Owne
     permission_denied_message = _("You cannot edit other users!")
 
 
-class UserDelete(SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView, OwnerPermission, UserHasTask):
+class UserDelete(SuccessMessageMixin,
+                 CustomLoginRequiredMixin,
+                 DeleteView,
+                 OwnerPermission,
+                 UserHasTask):
     model = CustomUser
     template_name = 'form.html'
     extra_context = {
