@@ -12,6 +12,6 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
     def handle_no_permission(self):
         if not self.request.user.is_authenticated:
             messages.warning(self.request,
-                             self.permission_denied_message,
+                             CustomLoginRequiredMixin.permission_denied_message,
                              extra_tags='danger')
         return super().handle_no_permission()

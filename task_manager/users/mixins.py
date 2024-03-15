@@ -15,7 +15,7 @@ class OwnerPermission(UserPassesTestMixin):
     def handle_no_permission(self):
         if self.raise_exception or self.request.user.is_authenticated:
             messages.warning(self.request, self.permission_denied_message)
-            return redirect(self.redirect_field_name)
+            return redirect(OwnerPermission.redirect_field_name)
         return super().handle_no_permission()
 
 
@@ -30,6 +30,6 @@ class UserHasTask(UserPassesTestMixin):
 
     def handle_no_permission(self):
         if self.raise_exception or self.request.user.is_authenticated:
-            messages.warning(self.request, self.denied_message)
-            return redirect(self.redirect_field_name)
+            messages.warning(self.request, UserHasTask.denied_message)
+            return redirect(UserHasTask.redirect_field_name)
         return super().handle_no_permission()

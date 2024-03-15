@@ -40,6 +40,13 @@ class UserUpdate(SuccessMessageMixin,
     success_url = reverse_lazy('users:index')
     permission_denied_message = _("You cannot edit other users!")
 
+    def dispatch(self, context, **response_kwargs):
+        if not self.request.user.is_authenticated:
+            return CustomLoginRequiredMixin.handle_no_permission(self)
+        if not OwnerPermission.test_func(self):
+            return OwnerPermission.handle_no_permission(self)
+        return super().dispatch(context, **response_kwargs)
+
 
 class UserDelete(SuccessMessageMixin,
                  CustomLoginRequiredMixin,
@@ -57,6 +64,8 @@ class UserDelete(SuccessMessageMixin,
     permission_denied_message = _("You cannot delete other users!")
 
     def dispatch(self, context, **response_kwargs):
+        if not self.request.user.is_authenticated:
+            return CustomLoginRequiredMixin.handle_no_permission(self)
         if not OwnerPermission.test_func(self):
             return OwnerPermission.handle_no_permission(self)
         if UserHasTask.test_func(self):
