@@ -6,7 +6,8 @@ class UserForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'username']
+        fields = ['first_name', 'last_name',
+                  'username', 'password1', 'password2']
 
     def clean_username(self):
         if 'username' in self.changed_data:

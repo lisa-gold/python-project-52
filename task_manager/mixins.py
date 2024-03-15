@@ -9,9 +9,9 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
     redirect_field_name = ''
     login_url = reverse_lazy('login')
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.add_message(request, messages.ERROR,
-                                 self.permission_denied_message)
-            return self.handle_no_permission()
-        return super().dispatch(request, *args, **kwargs)
+    def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
+            messages.warning(self.request,
+                             self.permission_denied_message,
+                             extra_tags='danger')
+        return super().handle_no_permission()
