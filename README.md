@@ -47,6 +47,11 @@ $ git cone https://github.com/lisa-gold/python-project-52.git
 # change the working directory
 $ cd python-project-52
 
+# create .env and copy content from the sample
+$ cp .env.sample .env2
+
+# fill .env with your values
+
 # start the application
 $ make start
 
