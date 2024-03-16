@@ -1,17 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
-from json import load
 from django.contrib.messages import get_messages
-from task_manager.settings import BASE_DIR
 from django.utils.translation import gettext_lazy as _
-
-
-FIXTURES = f'{BASE_DIR}/task_manager/tests/fixtures'
-
-
-def get_content(filename):
-    with open(f'{FIXTURES}/{filename}') as file:
-        return load(file)
 
 
 class AuthTestCase(TestCase):

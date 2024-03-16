@@ -1,31 +1,19 @@
 from django.core.exceptions import ObjectDoesNotExist
 from task_manager.labels.models import Label
 from django.urls import reverse
-from json import load
 from task_manager.users.models import CustomUser
 from task_manager.tests.test_auth import AuthTestCase
 from django.contrib.messages import get_messages
-from task_manager.settings import BASE_DIR
+from task_manager.tests.parser import get_content
 from django.utils.translation import gettext_lazy as _
 
 
-FIXTURES = f'{BASE_DIR}/task_manager/tests/fixtures'
-
-
-def get_content(filename):
-    with open(f'{FIXTURES}/{filename}') as file:
-        return load(file)
-
-
 class LabelsTestCase(AuthTestCase):
+    fixtures = ['db.json']
     page = 'labels'
 
     def setUp(self):
         self.dump_data = get_content('data.json')
-        user = self.dump_data.get('users').get('existing1')
-        label = self.dump_data.get('labels').get('existing')
-        CustomUser.objects.create(**user)
-        Label.objects.create(**label)
 
     def test_index_page(self):
         # logged in
@@ -35,7 +23,7 @@ class LabelsTestCase(AuthTestCase):
 
         labels = Label.objects.all()
         count = labels.count()
-        self.assertEqual(count, 1)
+        self.assertEqual(count, 2)
         self.assertQuerysetEqual(
             response.context_data['label_list'],
             labels,
@@ -75,7 +63,7 @@ class LabelsTestCase(AuthTestCase):
 
     def test_delete(self):
         self.client.force_login(user=CustomUser.objects.get(id=1))
-        exist_label = Label.objects.get(id=1)
+        exist_label = Label.objects.get(id=2)
 
         response = self.client.post(reverse('labels:delete',
                                             args=[exist_label.pk]))
@@ -85,4 +73,4 @@ class LabelsTestCase(AuthTestCase):
         self.assertRedirects(response, reverse('labels:index'))
         self.assertEqual(messages[0].message, _('Label successfully deleted!'))
         with self.assertRaises(ObjectDoesNotExist):
-            Label.objects.get(id=1)
+            Label.objects.get(id=2)

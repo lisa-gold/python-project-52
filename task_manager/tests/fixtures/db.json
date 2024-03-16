@@ -1,0 +1,98 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$kT3OHRJNlWuDn1EYMmqAaE$/U2VJBsZsg5joiy5DGNwLqNp6cGNeb9w2SrBejHKoX0=",
+            "last_login": "2024-03-16T15:17:31.717Z",
+            "is_superuser": false,
+            "username": "wolf",
+            "first_name": "John",
+            "last_name": "Snow",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-03-10T07:46:09.932Z",
+            "groups": [],
+            "user_permissions": []
+            }
+        },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$kT3OHRJNlWuDn1EYMmqAaE$/U2VJBsZsg5joiy5DGNwLqNp6cGNeb9w2SrBejHKoX0=",
+            "last_login": "2024-03-16T15:17:31.717Z",
+            "is_superuser": false,
+            "username": "sara",
+            "first_name": "Sara",
+            "last_name": "Connor",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-03-10T07:46:09.932Z",
+            "groups": [],
+            "user_permissions": []
+            }
+        },
+    {
+        "model": "users.customuser",
+        "pk": 1,
+        "fields": {}},
+    {
+        "model": "users.customuser",
+        "pk": 2,
+        "fields": {}},
+    {
+        "model": "labels.label",
+        "pk": 1,
+        "fields": {
+            "name": "easy",
+            "created_at": "2024-03-10T07:47:52.969Z"
+            }
+        },
+    {
+        "model": "labels.label",
+        "pk": 2,
+        "fields": {
+            "name": "to be deleted (label)",
+            "created_at": "2024-03-10T07:47:52.969Z"
+            }
+        },
+    {
+        "model": "tasks.task",
+        "pk": 1,
+        "fields": {
+            "name": "feed the cat",
+            "description": "",
+            "author": 2,
+            "status": 1,
+            "executor": 2,
+            "created_at": "2024-03-10T07:46:43.135Z"
+            }
+        },
+    {
+        "model": "tasks.labelrelationtask",
+        "pk": 1,
+        "fields": {
+            "label": 1,
+            "task": 1
+            }
+        },
+    {
+        "model": "statuses.status",
+        "pk": 1,
+        "fields": {
+            "name": "completed",
+            "created_at": "2024-03-10T07:46:29.786Z"
+            }
+        },
+    {
+        "model": "statuses.status",
+        "pk": 2,
+        "fields": {
+            "name": "to be deleted",
+            "created_at": "2024-03-10T07:46:29.786Z"
+            }
+        }
+    ]

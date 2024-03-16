@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class OwnerPermission(UserPassesTestMixin):
+class CanSelfManageObject(UserPassesTestMixin):
     redirect_field_name = reverse_lazy('users:index')
     permission_denied_message = ''
 
@@ -13,13 +13,13 @@ class OwnerPermission(UserPassesTestMixin):
         return self.get_object().id == self.request.user.id
 
     def handle_no_permission(self):
-        if self.raise_exception or self.request.user.is_authenticated:
+        if self.request.user.is_authenticated:
             messages.warning(self.request, self.permission_denied_message)
-            return redirect(OwnerPermission.redirect_field_name)
+            return redirect(CanSelfManageObject.redirect_field_name)
         return super().handle_no_permission()
 
 
-class UserHasTask(UserPassesTestMixin):
+class CanObjectBeDeleted(UserPassesTestMixin):
     redirect_field_name = reverse_lazy('users:index')
     denied_message = _("You cannot delete this user because\
                        he/she has a task to execute!")
@@ -30,6 +30,6 @@ class UserHasTask(UserPassesTestMixin):
 
     def handle_no_permission(self):
         if self.raise_exception or self.request.user.is_authenticated:
-            messages.warning(self.request, UserHasTask.denied_message)
-            return redirect(UserHasTask.redirect_field_name)
+            messages.warning(self.request, CanObjectBeDeleted.denied_message)
+            return redirect(CanObjectBeDeleted.redirect_field_name)
         return super().handle_no_permission()

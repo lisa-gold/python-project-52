@@ -2,28 +2,16 @@ from django.test import TestCase
 from django.core.exceptions import ObjectDoesNotExist
 from task_manager.users.models import CustomUser
 from django.urls import reverse
-from json import load
-from task_manager.settings import BASE_DIR
+from task_manager.tests.parser import get_content
 from django.contrib.messages import get_messages
 from django.utils.translation import gettext_lazy as _
 
 
-FIXTURES = f'{BASE_DIR}/task_manager/tests/fixtures'
-
-
-def get_content(filename):
-    with open(f'{FIXTURES}/{filename}') as file:
-        return load(file)
-
-
 class UsersTestCase(TestCase):
+    fixtures = ['db.json']
 
     def setUp(self):
         self.dump_data = get_content('data.json')
-        user1 = self.dump_data.get('users').get('existing1')
-        user2 = self.dump_data.get('users').get('existing2')
-        CustomUser.objects.create(**user1)
-        CustomUser.objects.create(**user2)
 
     def test_index_page(self):
         response = self.client.get(reverse('users:index'))

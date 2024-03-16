@@ -51,7 +51,7 @@
     },
     "labels": {
         "new": {
-            "pk": 2,
+            "pk": 3,
             "name": "urgent"
         },
         "existing": {
@@ -65,7 +65,7 @@
     },
     "statuses": {
         "new": {
-            "pk": 2,
+            "pk": 3,
             "name": "25%"
         },
         "existing": {

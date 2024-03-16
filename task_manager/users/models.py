@@ -8,4 +8,4 @@ class CustomUser(User):
         return reverse('users:index')
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.get_full_name()

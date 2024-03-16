@@ -1,31 +1,19 @@
 from django.core.exceptions import ObjectDoesNotExist
 from task_manager.statuses.models import Status
 from django.urls import reverse
-from json import load
 from task_manager.users.models import CustomUser
 from task_manager.tests.test_auth import AuthTestCase
 from django.contrib.messages import get_messages
-from task_manager.settings import BASE_DIR
+from task_manager.tests.parser import get_content
 from django.utils.translation import gettext_lazy as _
 
 
-FIXTURES = f'{BASE_DIR}/task_manager/tests/fixtures'
-
-
-def get_content(filename):
-    with open(f'{FIXTURES}/{filename}') as file:
-        return load(file)
-
-
 class StatusesTestCase(AuthTestCase):
+    fixtures = ['db.json']
     page = 'statuses'
 
     def setUp(self):
         self.dump_data = get_content('data.json')
-        user = self.dump_data.get('users').get('existing1')
-        status = self.dump_data.get('statuses').get('existing')
-        CustomUser.objects.create(**user)
-        Status.objects.create(**status)
 
     def test_index_page(self):
         # without authorization
@@ -43,7 +31,7 @@ class StatusesTestCase(AuthTestCase):
 
         statuses = Status.objects.all()
         count = statuses.count()
-        self.assertEqual(count, 1)
+        self.assertEqual(count, 2)
         self.assertQuerysetEqual(
             response.context_data['status_list'],
             statuses,
@@ -83,7 +71,7 @@ class StatusesTestCase(AuthTestCase):
 
     def test_delete(self):
         self.client.force_login(user=CustomUser.objects.get(id=1))
-        exist_status = Status.objects.get(id=1)
+        exist_status = Status.objects.get(id=2)
         response = self.client.post(reverse('statuses:delete',
                                             args=[exist_status.pk]))
         messages = list(get_messages(response.wsgi_request))
@@ -91,4 +79,4 @@ class StatusesTestCase(AuthTestCase):
         self.assertRedirects(response, reverse('statuses:index'))
         self.assertEqual(messages[0].message, _('Status successfully deleted!'))
         with self.assertRaises(ObjectDoesNotExist):
-            Status.objects.get(id=1)
+            Status.objects.get(id=2)

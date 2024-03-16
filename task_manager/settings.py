@@ -107,7 +107,10 @@ if not DEBUG or DATABASE_URL:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'task_manager.users.password_validation.CustomMinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 3,
+        }
     },
 ]
 

@@ -4,31 +4,15 @@ from task_manager.tasks.models import Task
 from django.urls import reverse
 from task_manager.users.models import CustomUser
 from django.contrib.messages import get_messages
-from json import load
-from task_manager.statuses.models import Status
-from task_manager.settings import BASE_DIR
+from task_manager.tests.parser import get_content
 from django.utils.translation import gettext_lazy as _
 
 
-FIXTURES = f'{BASE_DIR}/task_manager/tests/fixtures'
-
-
-def get_content(filename):
-    with open(f'{FIXTURES}/{filename}') as file:
-        return load(file)
-
-
 class TasksTestCase(AuthTestCase):
+    fixtures = ['db.json']
+
     def setUp(self):
         self.dump_data = get_content('data.json')
-        user = self.dump_data.get('users').get('existing1')
-        status = self.dump_data.get('statuses').get('existing')
-        task = self.dump_data.get('tasks').get('existing')
-        CustomUser.objects.create(**user)
-        Status.objects.create(**status)
-        task['status'] = Status.objects.get(id=1)
-        task['author'] = CustomUser.objects.get(id=1)
-        Task.objects.create(**task)
 
     def test_index_page(self):
         # without authorization
@@ -91,7 +75,7 @@ class TasksTestCase(AuthTestCase):
         self.assertEqual(messages[0].message, _('Задача успешно изменена'))
 
     def test_delete(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
+        self.client.force_login(user=CustomUser.objects.get(id=2))
         exist_task = Task.objects.get(id=1)
         response = self.client.post(reverse('tasks:delete',
                                             args=[exist_task.pk]))

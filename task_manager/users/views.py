@@ -1,7 +1,7 @@
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from task_manager.users.models import CustomUser
 from task_manager.users.forms import UserForm
-from task_manager.users.mixins import OwnerPermission, UserHasTask
+from task_manager.users.mixins import CanSelfManageObject, CanObjectBeDeleted
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from task_manager.mixins import CustomLoginRequiredMixin
@@ -27,8 +27,8 @@ class UserCreate(SuccessMessageMixin, CreateView):
 
 class UserUpdate(SuccessMessageMixin,
                  CustomLoginRequiredMixin,
-                 UpdateView,
-                 OwnerPermission):
+                 CanSelfManageObject,
+                 UpdateView):
     model = CustomUser
     form_class = UserForm
     template_name = 'form.html'
@@ -43,16 +43,16 @@ class UserUpdate(SuccessMessageMixin,
     def dispatch(self, context, **response_kwargs):
         if not self.request.user.is_authenticated:
             return CustomLoginRequiredMixin.handle_no_permission(self)
-        if not OwnerPermission.test_func(self):
-            return OwnerPermission.handle_no_permission(self)
+        if not CanSelfManageObject.test_func(self):
+            return CanSelfManageObject.handle_no_permission(self)
         return super().dispatch(context, **response_kwargs)
 
 
 class UserDelete(SuccessMessageMixin,
                  CustomLoginRequiredMixin,
-                 DeleteView,
-                 OwnerPermission,
-                 UserHasTask):
+                 CanSelfManageObject,
+                 CanObjectBeDeleted,
+                 DeleteView):
     model = CustomUser
     template_name = 'form.html'
     extra_context = {
@@ -66,8 +66,8 @@ class UserDelete(SuccessMessageMixin,
     def dispatch(self, context, **response_kwargs):
         if not self.request.user.is_authenticated:
             return CustomLoginRequiredMixin.handle_no_permission(self)
-        if not OwnerPermission.test_func(self):
-            return OwnerPermission.handle_no_permission(self)
-        if UserHasTask.test_func(self):
-            return UserHasTask.handle_no_permission(self)
+        if not CanSelfManageObject.test_func(self):
+            return CanSelfManageObject.handle_no_permission(self)
+        if CanObjectBeDeleted.test_func(self):
+            return CanObjectBeDeleted.handle_no_permission(self)
         return super().dispatch(context, **response_kwargs)
