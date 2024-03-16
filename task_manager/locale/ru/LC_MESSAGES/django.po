@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-16 16:08+0000\n"
+"POT-Creation-Date: 2024-03-16 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr "Создать метку"
 msgid "Create"
 msgstr "Создать"
 
-#: task_manager/labels/views.py:26 task_manager/tests/tests_labels.py:43
+#: task_manager/labels/views.py:26 task_manager/tests/tests_labels.py:41
 msgid "Label successfully added!"
 msgstr "Метка успешно создана"
 
@@ -49,7 +49,7 @@ msgstr "Изменение метки"
 msgid "Edit"
 msgstr "Изменить"
 
-#: task_manager/labels/views.py:38 task_manager/tests/tests_labels.py:62
+#: task_manager/labels/views.py:38 task_manager/tests/tests_labels.py:59
 msgid "Label successfully updated!"
 msgstr "Метка успешно изменена"
 
@@ -62,7 +62,7 @@ msgstr "Удаление метки"
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: task_manager/labels/views.py:49 task_manager/tests/tests_labels.py:74
+#: task_manager/labels/views.py:49 task_manager/tests/tests_labels.py:70
 msgid "Label successfully deleted!"
 msgstr "Метка успешно удалена"
 
@@ -71,7 +71,6 @@ msgid "Label is in use, you cannot delete it!"
 msgstr "Невозможно удалить метку, потому что она используется"
 
 #: task_manager/mixins.py:8 task_manager/tests/test_auth.py:18
-#: task_manager/tests/tests_statuses.py:25 task_manager/tests/tests_tasks.py:25
 msgid "To open this page log in!"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
@@ -88,7 +87,7 @@ msgstr "Английский"
 msgid "Create status"
 msgstr "Создать статус"
 
-#: task_manager/statuses/views.py:26 task_manager/tests/tests_statuses.py:52
+#: task_manager/statuses/views.py:26 task_manager/tests/tests_statuses.py:43
 msgid "Status successfully added!"
 msgstr "Статус успешно создан"
 
@@ -96,7 +95,7 @@ msgstr "Статус успешно создан"
 msgid "Edit status"
 msgstr "Изменение статуса"
 
-#: task_manager/statuses/views.py:38 task_manager/tests/tests_statuses.py:70
+#: task_manager/statuses/views.py:38 task_manager/tests/tests_statuses.py:60
 msgid "Status successfully updated!"
 msgstr "Статус успешно изменен"
 
@@ -104,7 +103,7 @@ msgstr "Статус успешно изменен"
 msgid "Delete status"
 msgstr "Удаление статуса"
 
-#: task_manager/statuses/views.py:49 task_manager/tests/tests_statuses.py:80
+#: task_manager/statuses/views.py:49 task_manager/tests/tests_statuses.py:69
 msgid "Status successfully deleted!"
 msgstr "Статус успешно удален"
 
@@ -153,7 +152,7 @@ msgstr "Метки"
 msgid "Create task"
 msgstr "Создать задачу"
 
-#: task_manager/tasks/views.py:36 task_manager/tests/tests_tasks.py:54
+#: task_manager/tasks/views.py:36 task_manager/tests/tests_tasks.py:43
 msgid "Task successfully added!"
 msgstr "Задача успешно создана"
 
@@ -162,7 +161,7 @@ msgid "Edit task"
 msgstr "Изменение задачи"
 
 #: task_manager/tasks/views.py:52
-#: task_manager/tests/tests_tasks.py:75
+#: task_manager/tests/tests_tasks.py:63
 msgid "Task successfully updated!"
 msgstr "Задача успешно изменена"
 
@@ -171,7 +170,7 @@ msgid "Delete task"
 msgstr "Удаление задачи"
 
 #: task_manager/tasks/views.py:64
-#: task_manager/tests/tests_tasks.py:85
+#: task_manager/tests/tests_tasks.py:73
 msgid "Task successfully deleted!"
 msgstr "Задача успешно удалена"
 

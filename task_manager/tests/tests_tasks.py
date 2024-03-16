@@ -13,19 +13,9 @@ class TasksTestCase(AuthTestCase):
 
     def setUp(self):
         self.dump_data = get_content('data.json')
+        self.client.force_login(user=CustomUser.objects.get(id=1))
 
     def test_index_page(self):
-        # without authorization
-        self.client.logout()
-        response = self.client.get(reverse('tasks:index'))
-        messages = list(get_messages(response.wsgi_request))
-        self.assertRedirects(response, reverse('login'))
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(messages[0].message,
-                         _('To open this page log in!'))
-
-        # logged in
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         response = self.client.get(reverse('tasks:index'))
         self.assertEqual(response.status_code, 200)
 
@@ -41,7 +31,6 @@ class TasksTestCase(AuthTestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_create(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         response_get = self.client.get(reverse('tasks:create'))
         self.assertEqual(response_get.status_code, 200)
 
@@ -56,7 +45,6 @@ class TasksTestCase(AuthTestCase):
         self.assertRedirects(response, reverse('tasks:index'))
 
     def test_update(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         exist_task = Task.objects.get(id=1)
         response = self.client.get(reverse('tasks:update',
                                            args=[exist_task.pk]))

@@ -14,10 +14,9 @@ class LabelsTestCase(AuthTestCase):
 
     def setUp(self):
         self.dump_data = get_content('data.json')
+        self.client.force_login(user=CustomUser.objects.get(id=1))
 
     def test_index_page(self):
-        # logged in
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         response = self.client.get(reverse('labels:index'))
         self.assertEqual(response.status_code, 200)
 
@@ -31,7 +30,6 @@ class LabelsTestCase(AuthTestCase):
         )
 
     def test_create(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         response = self.client.get(reverse('labels:create'))
         self.assertEqual(response.status_code, 200)
         new_label = self.dump_data.get('labels').get('new')
@@ -43,7 +41,6 @@ class LabelsTestCase(AuthTestCase):
         self.assertEqual(messages[0].message, _('Label successfully added!'))
 
     def test_update(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         exist_label = Label.objects.get(id=1)
         response = self.client.get(reverse('labels:update',
                                            args=[exist_label.pk]))
@@ -62,7 +59,6 @@ class LabelsTestCase(AuthTestCase):
         self.assertEqual(messages[0].message, _('Label successfully updated!'))
 
     def test_delete(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         exist_label = Label.objects.get(id=2)
 
         response = self.client.post(reverse('labels:delete',

@@ -14,17 +14,9 @@ class StatusesTestCase(AuthTestCase):
 
     def setUp(self):
         self.dump_data = get_content('data.json')
+        self.client.force_login(user=CustomUser.objects.get(id=1))
 
     def test_index_page(self):
-        # without authorization
-        self.client.logout()
-        response = self.client.get(reverse('statuses:index'))
-        messages = list(get_messages(response.wsgi_request))
-        self.assertRedirects(response, reverse('login'))
-        self.assertEqual(messages[0].message,
-                         _('To open this page log in!'))
-
-        # logged in
         self.client.force_login(user=CustomUser.objects.get(id=1))
         response = self.client.get(reverse('statuses:index'))
         self.assertEqual(response.status_code, 200)
@@ -39,7 +31,6 @@ class StatusesTestCase(AuthTestCase):
         )
 
     def test_create(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         response = self.client.get(reverse('statuses:create'))
         self.assertEqual(response.status_code, 200)
 
@@ -52,7 +43,6 @@ class StatusesTestCase(AuthTestCase):
         self.assertEqual(messages[0].message, _('Status successfully added!'))
 
     def test_update(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         exist_status = Status.objects.get(pk=1)
         response = self.client.get(reverse('statuses:update',
                                            args=[exist_status.pk]))
@@ -70,7 +60,6 @@ class StatusesTestCase(AuthTestCase):
         self.assertEqual(messages[0].message, _('Status successfully updated!'))
 
     def test_delete(self):
-        self.client.force_login(user=CustomUser.objects.get(id=1))
         exist_status = Status.objects.get(id=2)
         response = self.client.post(reverse('statuses:delete',
                                             args=[exist_status.pk]))
