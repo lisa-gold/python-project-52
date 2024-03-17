@@ -1,6 +1,6 @@
 from django.db import models
 from task_manager.users.models import CustomUser
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 class Task(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
-    author = models.ForeignKey(User,
+    author = models.ForeignKey(CustomUser,
                                on_delete=models.PROTECT,
                                related_name='tasks',
                                verbose_name=_('Author'))

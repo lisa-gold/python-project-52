@@ -114,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# User model
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # Rollbar settings
 
 ROLLBAR = {

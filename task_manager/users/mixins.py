@@ -10,7 +10,7 @@ class CanSelfManageObject(UserPassesTestMixin):
     permission_denied_message = ''
 
     def test_func(self):
-        return self.get_object().id == self.request.user.id
+        return self.get_object() == self.request.user
 
     def handle_no_permission(self):
         if self.request.user.is_authenticated:

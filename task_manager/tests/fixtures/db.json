@@ -1,6 +1,6 @@
 [
     {
-        "model": "auth.user",
+        "model": "users.customuser",
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$720000$kT3OHRJNlWuDn1EYMmqAaE$/U2VJBsZsg5joiy5DGNwLqNp6cGNeb9w2SrBejHKoX0=",
@@ -18,7 +18,7 @@
             }
         },
     {
-        "model": "auth.user",
+        "model": "users.customuser",
         "pk": 2,
         "fields": {
             "password": "pbkdf2_sha256$720000$kT3OHRJNlWuDn1EYMmqAaE$/U2VJBsZsg5joiy5DGNwLqNp6cGNeb9w2SrBejHKoX0=",
@@ -35,14 +35,6 @@
             "user_permissions": []
             }
         },
-    {
-        "model": "users.customuser",
-        "pk": 1,
-        "fields": {}},
-    {
-        "model": "users.customuser",
-        "pk": 2,
-        "fields": {}},
     {
         "model": "labels.label",
         "pk": 1,
