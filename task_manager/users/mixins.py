@@ -22,7 +22,7 @@ class CanObjectBeDeleted(UserPassesTestMixin):
 
     def test_func(self):
         user = self.get_object()
-        return  user == self.request.user and\
+        return user == self.request.user and\
             not user.tasks.exists() and\
             not user.tasks_to_do.exists()
 
