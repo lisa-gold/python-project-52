@@ -40,17 +40,9 @@ class UserUpdate(SuccessMessageMixin,
     success_url = reverse_lazy('users:index')
     permission_denied_message = _("You cannot edit other users!")
 
-    def dispatch(self, context, **response_kwargs):
-        if not self.request.user.is_authenticated:
-            return CustomLoginRequiredMixin.handle_no_permission(self)
-        if not CanSelfManageObject.test_func(self):
-            return CanSelfManageObject.handle_no_permission(self)
-        return super().dispatch(context, **response_kwargs)
-
 
 class UserDelete(SuccessMessageMixin,
                  CustomLoginRequiredMixin,
-                 CanSelfManageObject,
                  CanObjectBeDeleted,
                  DeleteView):
     model = CustomUser
@@ -61,13 +53,3 @@ class UserDelete(SuccessMessageMixin,
         'btn_class': 'btn-danger'}
     success_message = _('Successfully deleted!')
     success_url = reverse_lazy('users:index')
-    permission_denied_message = _("You cannot delete other users!")
-
-    def dispatch(self, context, **response_kwargs):
-        if not self.request.user.is_authenticated:
-            return CustomLoginRequiredMixin.handle_no_permission(self)
-        if not CanSelfManageObject.test_func(self):
-            return CanSelfManageObject.handle_no_permission(self)
-        if CanObjectBeDeleted.test_func(self):
-            return CanObjectBeDeleted.handle_no_permission(self)
-        return super().dispatch(context, **response_kwargs)

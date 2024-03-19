@@ -62,4 +62,4 @@ class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin,
         'btn_class': 'btn-danger'}
     success_url = reverse_lazy('tasks:index')
     success_message = _('Task successfully deleted!')
-    redirect_field_name = reverse_lazy('tasks:index')
+    fail_url = reverse_lazy('tasks:index')

@@ -6,30 +6,28 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 class CanSelfManageObject(UserPassesTestMixin):
-    redirect_field_name = reverse_lazy('users:index')
-    permission_denied_message = ''
+    denied_url = reverse_lazy('users:index')
 
     def test_func(self):
         return self.get_object() == self.request.user
 
     def handle_no_permission(self):
-        if self.request.user.is_authenticated:
-            messages.warning(self.request, self.permission_denied_message)
-            return redirect(CanSelfManageObject.redirect_field_name)
-        return super().handle_no_permission()
+        messages.warning(self.request, self.permission_denied_message)
+        return redirect(self.denied_url)
 
 
 class CanObjectBeDeleted(UserPassesTestMixin):
-    redirect_field_name = reverse_lazy('users:index')
-    denied_message = _("You cannot delete this user because\
-                       he/she has a task to execute!")
+    denied_url = reverse_lazy('users:index')
+    message = _("You cannot delete this user (he/she has a task to execute)")
 
     def test_func(self):
-        return self.get_object().tasks.exists() or\
-            self.get_object().tasks_to_do.exists()
+        user = self.get_object()
+        return  user == self.request.user and\
+            not user.tasks.exists() and\
+            not user.tasks_to_do.exists()
 
     def handle_no_permission(self):
-        if self.raise_exception or self.request.user.is_authenticated:
-            messages.warning(self.request, CanObjectBeDeleted.denied_message)
-            return redirect(CanObjectBeDeleted.redirect_field_name)
-        return super().handle_no_permission()
+        if self.get_object() != self.request.user:
+            self.message = _("You cannot delete other users!")
+        messages.warning(self.request, self.message)
+        return redirect(self.denied_url)

@@ -12,7 +12,5 @@ class TaskAuthor(UserPassesTestMixin):
         return task.author == self.request.user
 
     def handle_no_permission(self):
-        if self.raise_exception or self.request.user.is_authenticated:
-            messages.warning(self.request, self.permission_denied_message)
-            return redirect(self.redirect_field_name)
-        return super().handle_no_permission()
+        messages.warning(self.request, self.permission_denied_message)
+        return redirect(self.fail_url)

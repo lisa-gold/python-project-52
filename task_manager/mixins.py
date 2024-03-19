@@ -2,16 +2,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import redirect
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
-    permission_denied_message = _('To open this page log in!')
-    redirect_field_name = ''
+    login_message = _('To open this page log in!')
     login_url = reverse_lazy('login')
 
     def handle_no_permission(self):
         if not self.request.user.is_authenticated:
             messages.warning(self.request,
-                             self.permission_denied_message,
+                             self.login_message,
                              extra_tags='danger')
+            return redirect(self.login_url)
         return super().handle_no_permission()
