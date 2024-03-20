@@ -266,20 +266,6 @@ files = [
 Django = ">=3.2"
 
 [[package]]
-name = "django-extensions"
-version = "3.2.3"
-description = "Extensions for Django"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "django-extensions-3.2.3.tar.gz", hash = "sha256:44d27919d04e23b3f40231c4ab7af4e61ce832ef46d610cc650d53e68328410a"},
-    {file = "django_extensions-3.2.3-py3-none-any.whl", hash = "sha256:9600b7562f79a92cbf1fde6403c04fee314608fefbb595502e34383ae8203401"},
-]
-
-[package.dependencies]
-Django = ">=3.2"
-
-[[package]]
 name = "django-filter"
 version = "23.5"
 description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
@@ -571,17 +557,6 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
-name = "python-gettext"
-version = "5.0"
-description = "Python Gettext po to mo file compiler."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "python-gettext-5.0.tar.gz", hash = "sha256:869af1ea45e3dab6180557259824c2a62f1800e1286226af912431fe75c5084c"},
-    {file = "python_gettext-5.0-py3-none-any.whl", hash = "sha256:083d4c72c5e72a6bd83b0570770792b9a1e572d8ab3e9cba554e0cd4781aa84a"},
-]
-
-[[package]]
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
@@ -730,4 +705,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "496c59f072d3ceb82a742e8f8fbcb603aa483146891152b0ae2f37a716e627c0"
+content-hash = "3d2d85e4c3c46346ed2dcad8fe16314357d77c9b41e3fec062afef55e02ce9b5"
