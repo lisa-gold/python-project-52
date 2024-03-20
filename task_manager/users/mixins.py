@@ -21,13 +21,9 @@ class CanObjectBeDeleted(UserPassesTestMixin):
     message = _("You cannot delete this user (he/she has a task to execute)")
 
     def test_func(self):
-        user = self.get_object()
-        return user == self.request.user and\
-            not user.tasks.exists() and\
-            not user.tasks_to_do.exists()
+        return not self.get_object().tasks.exists() and\
+            not self.get_object().tasks_to_do.exists()
 
     def handle_no_permission(self):
-        if self.get_object() != self.request.user:
-            self.message = _("You cannot delete other users!")
         messages.warning(self.request, self.message)
         return redirect(self.denied_url)

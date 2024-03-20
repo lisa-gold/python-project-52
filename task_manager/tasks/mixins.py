@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-class TaskAuthor(UserPassesTestMixin):
+class TaskAuthorMixin(UserPassesTestMixin):
     permission_denied_message = _("Only task's author can delete it!")
 
     def test_func(self):

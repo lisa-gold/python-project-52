@@ -10,7 +10,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django_filters.views import FilterView
 from django.utils.translation import gettext_lazy as _
 from task_manager.mixins import CustomLoginRequiredMixin
-from task_manager.tasks.mixins import TaskAuthor
+from task_manager.tasks.mixins import TaskAuthorMixin
 
 
 class IndexView(CustomLoginRequiredMixin, FilterView):
@@ -53,7 +53,7 @@ class TaskUpdate(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class TaskDelete(CustomLoginRequiredMixin, SuccessMessageMixin,
-                 TaskAuthor, DeleteView):
+                 TaskAuthorMixin, DeleteView):
     model = Task
     template_name = 'form.html'
     extra_context = {

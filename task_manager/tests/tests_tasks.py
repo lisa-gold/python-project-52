@@ -3,8 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from task_manager.tasks.models import Task
 from django.urls import reverse
 from task_manager.users.models import CustomUser
-from django.contrib.messages import get_messages
-from task_manager.tests.parser import get_content
+from . import get_content
 from django.utils.translation import gettext_lazy as _
 
 
@@ -35,12 +34,13 @@ class TasksTestCase(AuthTestCase):
         self.assertEqual(response_get.status_code, 200)
 
         new_task = self.dump_data.get('tasks').get('new')
-        response = self.client.post(reverse('tasks:create'), new_task)
-        messages = list(get_messages(response.wsgi_request))
+        response = self.client.post(reverse('tasks:create'),
+                                    new_task,
+                                    follow=True)
         created_task = Task.objects.get(id=new_task.get('pk'))
         count = Task.objects.all().count()
         self.assertEqual(count, 2)
-        self.assertEqual(messages[0].message, _('Task successfully added!'))
+        self.assertContains(response, _('Task successfully added!'))
         self.assertEqual(created_task.name, new_task.get('name'))
         self.assertRedirects(response, reverse('tasks:index'))
 
@@ -54,22 +54,22 @@ class TasksTestCase(AuthTestCase):
         response = self.client.post(
             reverse('tasks:update', args=[exist_task.pk]),
             new_task,
+            follow=True
         )
-        messages = list(get_messages(response.wsgi_request))
 
         self.assertRedirects(response, reverse('tasks:index'))
         updated_task = Task.objects.get(pk=exist_task.pk)
         self.assertEqual(updated_task.name, new_task.get('name'))
-        self.assertEqual(messages[0].message, _('Задача успешно изменена'))
+        self.assertContains(response, _('Task successfully updated!'))
 
     def test_delete(self):
         self.client.force_login(user=CustomUser.objects.get(id=2))
         exist_task = Task.objects.get(id=1)
         response = self.client.post(reverse('tasks:delete',
-                                            args=[exist_task.pk]))
-        messages = list(get_messages(response.wsgi_request))
+                                            args=[exist_task.pk]),
+                                    follow=True)
 
         self.assertRedirects(response, reverse('tasks:index'))
-        self.assertEqual(messages[0].message, _('Задача успешно удалена'))
+        self.assertContains(response, _('Task successfully deleted!'))
         with self.assertRaises(ObjectDoesNotExist):
             Task.objects.get(id=1)

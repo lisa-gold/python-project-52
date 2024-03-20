@@ -3,8 +3,7 @@ from task_manager.labels.models import Label
 from django.urls import reverse
 from task_manager.users.models import CustomUser
 from task_manager.tests.test_auth import AuthTestCase
-from django.contrib.messages import get_messages
-from task_manager.tests.parser import get_content
+from . import get_content
 from django.utils.translation import gettext_lazy as _
 
 
@@ -33,12 +32,13 @@ class LabelsTestCase(AuthTestCase):
         response = self.client.get(reverse('labels:create'))
         self.assertEqual(response.status_code, 200)
         new_label = self.dump_data.get('labels').get('new')
-        response = self.client.post(reverse('labels:create'), new_label)
-        messages = list(get_messages(response.wsgi_request))
+        response = self.client.post(reverse('labels:create'),
+                                    new_label,
+                                    follow=True)
         created_label = Label.objects.get(id=new_label.get('pk'))
         self.assertEqual(created_label.name, new_label.get('name'))
         self.assertRedirects(response, reverse('labels:index'))
-        self.assertEqual(messages[0].message, _('Label successfully added!'))
+        self.assertContains(response, _('Label successfully added!'))
 
     def test_update(self):
         exist_label = Label.objects.get(id=1)
@@ -50,23 +50,22 @@ class LabelsTestCase(AuthTestCase):
         response = self.client.post(
             reverse('labels:update', args=[exist_label.pk]),
             new_label,
+            follow=True
         )
-        messages = list(get_messages(response.wsgi_request))
 
         self.assertRedirects(response, reverse('labels:index'))
         updated_label = Label.objects.get(pk=exist_label.pk)
         self.assertEqual(updated_label.name, new_label.get('name'))
-        self.assertEqual(messages[0].message, _('Label successfully updated!'))
+        self.assertContains(response, _('Label successfully updated!'))
 
     def test_delete(self):
         exist_label = Label.objects.get(id=2)
 
         response = self.client.post(reverse('labels:delete',
-                                            args=[exist_label.pk]))
-
-        messages = list(get_messages(response.wsgi_request))
+                                            args=[exist_label.pk]),
+                                    follow=True)
 
         self.assertRedirects(response, reverse('labels:index'))
-        self.assertEqual(messages[0].message, _('Label successfully deleted!'))
+        self.assertContains(response, _('Label successfully deleted!'))
         with self.assertRaises(ObjectDoesNotExist):
             Label.objects.get(id=2)

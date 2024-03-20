@@ -48,7 +48,7 @@ $ git cone https://github.com/lisa-gold/python-project-52.git
 $ cd python-project-52
 
 # create .env and copy content from the sample
-$ cp .env.sample .env2
+$ cp .env.sample .env
 
 # fill .env with your values
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-16 16:24+0000\n"
+"POT-Creation-Date: 2024-03-20 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,11 +58,11 @@ msgid "Delete label"
 msgstr "Удаление метки"
 
 #: task_manager/labels/views.py:46 task_manager/statuses/views.py:46
-#: task_manager/tasks/views.py:61 task_manager/users/views.py:60
+#: task_manager/tasks/views.py:61 task_manager/users/views.py:53
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: task_manager/labels/views.py:49 task_manager/tests/tests_labels.py:70
+#: task_manager/labels/views.py:49 task_manager/tests/tests_labels.py:69
 msgid "Label successfully deleted!"
 msgstr "Метка успешно удалена"
 
@@ -70,15 +70,15 @@ msgstr "Метка успешно удалена"
 msgid "Label is in use, you cannot delete it!"
 msgstr "Невозможно удалить метку, потому что она используется"
 
-#: task_manager/mixins.py:8 task_manager/tests/test_auth.py:18
+#: task_manager/mixins.py:9 task_manager/tests/test_auth.py:14
 msgid "To open this page log in!"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/settings.py:132
+#: task_manager/settings.py:136
 msgid "Russian"
 msgstr "Русский"
 
-#: task_manager/settings.py:133
+#: task_manager/settings.py:137
 msgid "English"
 msgstr "Английский"
 
@@ -160,8 +160,7 @@ msgstr "Задача успешно создана"
 msgid "Edit task"
 msgstr "Изменение задачи"
 
-#: task_manager/tasks/views.py:52
-#: task_manager/tests/tests_tasks.py:63
+#: task_manager/tasks/views.py:52 task_manager/tests/tests_tasks.py:63
 msgid "Task successfully updated!"
 msgstr "Задача успешно изменена"
 
@@ -169,8 +168,7 @@ msgstr "Задача успешно изменена"
 msgid "Delete task"
 msgstr "Удаление задачи"
 
-#: task_manager/tasks/views.py:64
-#: task_manager/tests/tests_tasks.py:73
+#: task_manager/tasks/views.py:64 task_manager/tests/tests_tasks.py:73
 msgid "Task successfully deleted!"
 msgstr "Задача успешно удалена"
 
@@ -264,24 +262,23 @@ msgstr "Полное имя"
 msgid "Registration date"
 msgstr "Дата создания"
 
-#: task_manager/tests/tests_users.py:42 task_manager/users/views.py:25
+#: task_manager/tests/tests_users.py:39 task_manager/users/views.py:25
 msgid "Successfully registered!"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/tests/tests_users.py:60 task_manager/users/views.py:41
+#: task_manager/tests/tests_users.py:56 task_manager/users/views.py:41
 msgid "You cannot edit other users!"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/tests/tests_users.py:72 task_manager/users/views.py:39
+#: task_manager/tests/tests_users.py:67 task_manager/users/views.py:39
 msgid "Successfully updated!"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/tests/tests_users.py:87
-#: task_manager/users/mixins.py:31
+#: task_manager/tests/tests_users.py:81 task_manager/users/views.py:57
 msgid "You cannot delete other users!"
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/tests/tests_users.py:96 task_manager/users/views.py:62
+#: task_manager/tests/tests_users.py:90 task_manager/users/views.py:55
 msgid "Successfully deleted!"
 msgstr "Пользователь успешно удален"
 
@@ -297,7 +294,7 @@ msgstr "Зарегистрировать"
 msgid "Edit user"
 msgstr "Изменение пользователя"
 
-#: task_manager/users/views.py:59
+#: task_manager/users/views.py:52
 msgid "Delete user"
 msgstr "Удаление пользователя"
 

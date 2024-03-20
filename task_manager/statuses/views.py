@@ -52,7 +52,7 @@ class StatusDelete(CustomLoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def dispatch(self, context, **response_kwargs):
         status = self.get_object()
-        if status.task_set.all():
+        if status.task_set.exists():
             messages.warning(self.request, self.denied_message)
             return HttpResponseRedirect(self.fail_url)
         return super().dispatch(context, **response_kwargs)
